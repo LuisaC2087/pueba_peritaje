@@ -1,0 +1,808 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/formato.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h3>Peritaje Automotriz</h3>
+        </header>
+    <main>
+        <div class="date-plate">
+            <div>
+                CLIENTE: {{ datos.cliente }}
+            </div>
+            <div class="plate">
+                FECHA: {{ datos.fecha }}
+
+            </div>
+        </div>
+        <!-- Vehicle Data Section -->
+        <div class="section">
+            <div class="section-title">
+                DATOS DE VEHÍCULO
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>PLACA</th>
+                            <td>{{ datos.placa_carro }}</td>
+                            <th>COLOR</th>
+                            <td>{{ datos.color }}</td>
+                        </tr>
+                        <tr>
+                            <th>MARCA</th>
+                            <td>{{ datos.marca }}</td>
+                            <th>CILINDRAJE</th>
+                            <td>{{ datos.cilindraje }}</td>
+                        </tr>
+                        <tr>
+                            <th>MODELO(AÑO)</th>
+                            <td>{{ datos.modelo }}</td>
+                            <th>COMBUSTIBLE</th>
+                            <td>{{ datos.combustible }}</td>
+                        </tr>
+                        <tr>
+                            <th>KILOMETRAJE</th>
+                            <td>{{ datos.kilometraje }}</td>
+                            <th>CARROCERÍA</th>
+                            <td>{{ datos.carroceria }}</td>
+                        </tr>
+                        <tr>
+                            <th>LINEA(VERSIÓN)</th>
+                            <td>{{ datos.linea }}</td>
+                            <th>SERVICIO</th>
+                            <td>{{ datos.servicio }}</td>
+                        </tr>
+                        <tr>
+                            <th>TIPO DE CAJA</th>
+                            <td>{{ datos.tipo_caja }}</td>
+                            <th>CATEGORÍA</th>
+                            <td>{{ datos.categoria }}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Latoneria and Painting Section -->
+        <div class="section">
+            <div class="section-title">
+                LATONERÍA Y PINTURA
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>CAPOT</td>
+                            <td>{{ datos.capot_seleccionado|join:", " }}</td>
+                            <td>GUARDABARRO TRA DER</td>
+                            <td>{{ datos.guardabarro_der_tra_seleccionado|join:", " }}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td>AREA MOTOR/PARALLAMAS</td>
+                            <td>{{ datos.torpedo_seleccionado|join:", " }}</td>
+                            <td>PUERTA TRASERA DER</td>
+                            <td>{{ datos.puerta_trasera_der_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>BOMPER DEL</td>
+                            <td>{{ datos.bomper_del_seleccionado|join:", " }}</td>
+                            <td>ESTRIBO DER</td>
+                            <td>{{ datos.estribo_der_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>GUARDABARRO DEL IZQ</td>
+                            <td>{{ datos.guarda_fango|join:", " }}</td>
+                            <td>PUERTA DEL DER</td>
+                            <td>{{ datos.guardabarro_del_der|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>ESTRIBO IZQ</td>
+                            <td>{{ datos.estribo_izq_seleccionado|join:", " }}</td>
+                            <td>GUARDABARRO DEL DER</td>
+                            <td>{{ datos.guardabarro_del_der|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PUERTA DEL IZQ</td>
+                            <td>{{ datos.puerta_del_izq_seleccionado|join:", " }}</td>
+                            <td>COSTADO DER</td>
+                            <td>{{ datos.costado_der_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PUERTA TRASERA IZQ</td>
+                            <td>{{ datos.puerta_trasera_izq_seleccionado|join:", " }}</td>
+                            <td>CAPOTA/TECHO</td>
+                            <td>{{ datos.capota_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>GUARDABARRO TRA IZQ</td>
+                            <td>{{ datos.guardabarro_tras_izq|join:", " }}</td>
+                            <td>COSTADO IZQ</td>
+                            <td>{{ datos.costado_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>BOMPER TRA</td>
+                            <td>{{ datos.bomper_tra_seleccionado|join:", " }}</td>
+                            <td>TAPA BAUL</td>
+                            <td>{{ datos.tapa_baul_seleccionado|join:", " }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+            </div>
+        </div>
+
+        <!-- Chasis Section -->
+        <div class="section">
+            <div class="section-title">
+                CHASIS
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>ALMA BOMPER DEL</td>
+                            <td>{{ datos.alma_bomper_del_seleccionado|join:", " }}</td>
+                            <td>ALMA BOMPER TRA</td>
+                            <td>{{ datos.alma_bomper_tra_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PUNTA CHASIS DEL. DER</td>
+                            <td>{{ datos.punta_chasis_del_seleccionado|join:", " }}</td>
+                            <td>PUNTA CHASIS DEL. IZQ</td>
+                            <td>{{ datos.punta_chasis_del_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>TRAVIESA SUPERIOR</td>
+                            <td>{{ datos.traviesa_superior_seleccionado|join:", " }}</td>
+                            <td>TRAVIESA INFERIOR</td>
+                            <td>{{ datos.traviesa_inferior_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>G/POLVO MET DEL. DER</td>
+                            <td>{{ datos.polvo_met_del_der_seleccionado|join:", " }}</td>
+                            <td>G/POLVO MET. INFERIOR</td>
+                            <td>{{ datos.polvo_met_del_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PARAL PANO. DER</td>
+                            <td>{{ datos.paral_pano_der_seleccionado|join:", " }}</td>
+                            <td>PARAL PANO. IZQ</td>
+                            <td>{{ datos.paral_pano_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PARAL PTA. DER</td>
+                            <td>{{ datos.paral_pta_der_seleccionado|join:", " }}</td>
+                            <td>PARAL PTA. IZQ</td>
+                            <td>{{ datos.paral_pta_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PARAL CENT. DER</td>
+                            <td>{{ datos.paral_cent_der_seleccionado|join:", " }}</td>
+                            <td>PARAL CENT. IZQ</td>
+                            <td>{{ datos.paral_cent_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>LARGUERO CAPOTA DER</td>
+                            <td>{{ datos.larguero_capota_der_seleccionado|join:", " }}</td>
+                            <td>LARGUERO CAPOTA IZQ</td>
+                            <td>{{ datos.larguero_capota_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PANEL TRA</td>
+                            <td>{{ datos.panel_tra_seleccionado|join:", " }}</td>
+                            <td>PISO BAUL/PLATON</td>
+                            <td>{{ datos.piso_baul_platon_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>G/POLVO MET. TRA. DER</td>
+                            <td>{{ datos.g_polvo_met_tra_der_seleccionado|join:", " }}</td>
+                            <td>G.POLVO MET. TRA. IZQ</td>
+                            <td>{{ datos.g_polvo_met_tra_izq_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PISO CARROCERIA</td>
+                            <td>{{ datos.piso_carroceria_seleccionado|join:", " }}</td>
+                            <td>PUNTA TRA. DER</td>
+                            <td>{{ datos.punta_tra_der_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>REFUERZO PISO</td>
+                            <td>{{ datos.refuerzo_piso_izq_seleccionado|join:", " }}</td>
+                            <td>CUNA MOTOR</td>
+                            <td>{{ datos.cuna_motor_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PUNTA TRA. IZQ</td>
+                            <td>{{ datos.punta_tra_izq_seleccionado|join:", " }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <!-- Additional Information -->
+
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_chasis }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Interior Cabina Section -->
+        <div class="section">
+            <div class="section-title">
+                INTERIOR CABINA
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>CARTERAS:</td>
+                            <td>{{ datos.carteras_seleccionado|join:", " }}</td>
+                            <td>CINTURONES:</td>
+                            <td>{{ datos.cinturones_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>CONSOLA:</td>
+                            <td>{{ datos.consola_seleccionado|join:", " }}</td>
+                            <td>ESPEJO INTERIOR:</td>
+                            <td>{{ datos.espejo_interior_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>FUNCIONAMIENTO SILLAS:</td>
+                            <td>{{ datos.funcionamiento_sillas_seleccionado|join:", " }}</td>
+                            <td>GUANTERA:</td>
+                            <td>{{ datos.guantera_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>MILLARE:</td>
+                            <td>{{ datos.millare_seleccionado|join:", " }}</td>
+                            <td>PARASOL:</td>
+                            <td>{{ datos.parasol_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>PERSIANA:</td>
+                            <td>{{ datos.persiana_seleccionado|join:", " }}</td>
+                            <td>TAPICERÍA PISO:</td>
+                            <td>{{ datos.tapiceria_piso_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>TAPICERÍA SILLAS:</td>
+                            <td>{{ datos.tapiceria_sillas_seleccionado|join:", " }}</td>
+                            <td>TAPIZADO TECHO:</td>
+                            <td>{{ datos.tapiceria_techo_seleccionado|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>TIMON:</td>
+                            <td>{{ datos.timon_seleccionado|join:", " }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sistema Electrico Section -->
+        <div class="section">
+            <div class="section-title">
+                SISTEMA ELECTRICO 
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>NOTA</th>
+                        </tr>
+                        <tr>
+                            <td>A/AC:</td>
+                            <td>{{ datos.a_ac }}</td>
+                            <td>{{ datos.nota_a_ac }}</td>
+                        </tr>
+                        <tr>
+                            <td>CALEFACCIÓN:</td>
+                            <td>{{ datos.calefaccion }}</td>
+                            <td>{{ datos.nota_calefaccion }}</td>
+                        </tr>
+                        <tr>
+                            <td>ENCENDIDO:</td>
+                            <td>{{ datos.encendido }}</td>
+                            <td>{{ datos.nota_encendido }}</td>
+                        </tr>
+                        <tr>
+                            <td>PLUMILLAS:</td>
+                            <td>{{ datos.plumillas }}</td>
+                            <td>{{ datos.nota_plumillas }}</td>
+                        </tr>
+                        <tr>
+                            <td>SILLAS ELECTRICAS:</td>
+                            <td>{{ datos.sillas_elect }}</td>
+                            <td>{{ datos.nota_sillas_elect }}</td>
+                        </tr>
+                        <tr>
+                            <td>BLOQUEO CENTRAL:</td>
+                            <td>{{ datos.bqueo_central }}</td>
+                            <td>{{ datos.nota_bqueo_central }}</td>
+                        </tr>
+                        <tr>
+                            <td>SIST VIDRIOS ELECTRICOS:</td>
+                            <td>{{ datos.e_vidrios_elect }}</td>
+                            <td>{{ datos.nota_e_vidrios_elect }}</td>
+                        </tr>
+                        <tr>
+                            <td>ESPEJOS ELECTRICOS:</td>
+                            <td>{{ datos.espejos_elect }}</td>
+                            <td>{{ datos.nota_espejos_elect }}</td>
+                        </tr>
+                        <tr>
+                            <td>RADIO:</td>
+                            <td>{{ datos.radio }}</td>
+                            <td>{{ datos.nota_radio }}</td>
+                        </tr>
+                        <tr>
+                            <td>SUNROOF:</td>
+                            <td>{{ datos.sunroof }}</td>
+                            <td>{{ datos.nota_sunroof }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_sis }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Luces Section -->
+        <div class="section">
+            <div class="section-title">
+                LUCES
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>NOTA</th>
+                        </tr>
+                        <tr>
+                            <td>ALTAS:</td>
+                            <td>{{ datos.altas }}</td>
+                            <td>{{ datos.nota_altas }}</td>
+                        </tr>
+                        <tr>
+                            <td>COCUYOS:</td>
+                            <td>{{ datos.cocuyos }}</td>
+                            <td>{{ datos.nota_cocuyos }}</td>
+                        </tr>
+                        <tr>
+                            <td>REVERSA:</td>
+                            <td>{{ datos.reversa }}</td>
+                            <td>{{ datos.nota_reversa }}</td>
+                        </tr>
+                        <tr>
+                            <td>DIRECCIONALES:</td>
+                            <td>{{ datos.direccionales }}</td>
+                            <td>{{ datos.nota_direccionales }}</td>
+                        </tr>
+                        <tr>
+                            <td>LUZ TECHO:</td>
+                            <td>{{ datos.luz_techo }}</td>
+                            <td>{{ datos.nota_luz_techo }}</td>
+                        </tr>
+                        <tr>
+                            <td>TERCER STOP:</td>
+                            <td>{{ datos.tercer_stop_luz }}</td>
+                            <td>{{ datos.nota_tercer_stop_luz }}</td>
+                        </tr>
+                        <tr>
+                            <td>LUCES LATERALES:</td>
+                            <td>{{ datos.luces_laterales }}</td>
+                            <td>{{ datos.nota_luces_laterales }}</td>
+                        </tr>
+                        <tr>
+                            <td>BAJAS:</td>
+                            <td>{{ datos.bajas }}</td>
+                            <td>{{ datos.nota_bajas }}</td>
+                        </tr>
+                        <tr>
+                            <td>FRENO:</td>
+                            <td>{{ datos.freno }}</td>
+                            <td>{{ datos.nota_freno }}</td>
+                        </tr>
+                        <tr>
+                            <td>ESTACIONARIAS:</td>
+                            <td>{{ datos.estacionarias }}</td>
+                            <td>{{ datos.nota_estacionarias }}</td>
+                        </tr>
+                        <tr>
+                            <td>LUZ PLACA:</td>
+                            <td>{{ datos.placa }}</td>
+                            <td>{{ datos.nota_placa }}</td>
+                        </tr>
+                        <tr>
+                            <td>EXPLORADORAS:</td>
+                            <td>{{ datos.exploradoras_luz }}</td>
+                            <td>{{ datos.nota_exploradoras_luz }}</td>
+                        </tr>
+                        <tr>
+                            <td>ANTIENEBLA:</td>
+                            <td>{{ datos.antinieblas }}</td>
+                            <td>{{ datos.nota_antinieblas }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_luces }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Vidrios Section -->
+
+        <div class="section">
+            <div class="section-title">
+                VIDRIOS
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>PANORAMICO DEL:</td>
+                            <td>{{ datos.panoramico_del|join:", " }}</td>
+                            <td>VIDRIOS TRASEROS IZQUIERDO:</td>
+                            <td>{{ datos.vidrios_tra_izq|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>FAROLA DERECHA:</td>
+                            <td>{{ datos.farola_der|join:", " }}</td>
+                            <td>STOP IZQUIERDO:</td>
+                            <td>{{ datos.stop_izq|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>FAROLA IZQUIERDA:</td>
+                            <td>{{ datos.farola_izq|join:", " }}</td>
+                            <td>STOP DERECHO:</td>
+                            <td>{{ datos.stop_der|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>EXPLORADORAS:</td>
+                            <td>{{ datos.exploradoras|join:", " }}</td>
+                            <td>TERCER STOP:</td>
+                            <td>{{ datos.tercer_stop|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>ANTINIEBLA:</td>
+                            <td>{{ datos.antiniebla|join:", " }}</td>
+                            <td>PANORAMICO TRASERA:</td>
+                            <td>{{ datos.panoramico_tra|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>ESPEJO IZQUIERDO:</td>
+                            <td>{{ datos.espejo_izq|join:", " }}</td>
+                            <td>VIDRIOS CUSTODIOS:</td>
+                            <td>{{ datos.vidrios_custodios|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>ESPEJO DERECHO:</td>
+                            <td>{{ datos.espejo_der|join:", " }}</td>
+                            <td>VIDRIOS TRASEROS DERECHO:</td>
+                            <td>{{ datos.vidrios_tra_der|join:", " }}</td>
+                        </tr>
+                        <tr>
+                            <td>VIDRIOS DEL IZQUIERDO:</td>
+                            <td>{{ datos.vidrios_del_izq|join:", " }}</td>
+                            <td>VIDRIOS DEL DERECHO:</td>
+                            <td>{{ datos.vidrios_del_der|join:", " }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_vidrios }}
+                </div>
+            </div>
+        </div>
+
+        <!-- LLantas Section -->
+        <div class="section">
+            <div class="section-title">
+                LLANTAS
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>PORCENTAJE</th>
+                            <th>NOTA</th>
+                        </tr>
+                        <tr>
+                            <td>LLANTAS DEL. DER:</td>
+                            <td>{{ datos.llantas_del_der }}  %</td>
+                            <td>{{ datos.llantas_del_der_nota }}</td>
+                        </tr>
+                        <tr>
+                            <td>LLANTAS DEL. IZQ:</td>
+                            <td>{{ datos.llantas_del_izq }}  %</td>
+                            <td>{{ datos.llantas_del_izq_nota }}</td>
+                        </tr>
+                        <tr>
+                            <td>LLANTAS TRAS. DER:</td>
+                            <td>{{ datos.llantas_tra_der }}  %</td>
+                            <td>{{ datos.llantas_tra_der_nota }}</td>
+                        </tr>
+                        <tr>
+                            <td>LLANTAS TRAS. IZQ:</td>
+                            <td>{{ datos.llantas_tra_izq }}  %</td>
+                            <td>{{ datos.llantas_tra_izq_nota }}</td>
+                        </tr>
+                        <tr>
+                            <td>LLANTA REP:</td>
+                            <td>{{ datos.llanta_reemplazo }}  %</td>
+                            <td>{{ datos.llanta_reemplazo_nota }}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_llantas }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Fugas Section -->
+        <div class="section">
+            <div class="section-title">
+                FUGAS
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>ACEITE DE MOTOR:</td>
+                            <td>{{ datos.aceite_de_motor_datos }}</td>
+                            <td>ACEITE HIDRAULICOS:</td>
+                            <td>{{ datos.aceite_hidraulicos_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>ACEITE DE CAJA:</td>
+                            <td>{{ datos.aceite_de_caja_datos }}</td>
+                            <td>REFRIGERANTE:</td>
+                            <td>{{ datos.refrigerante_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>LIQUIDO DE FRENOS:</td>
+                            <td>{{ datos.liquido_de_frenos_datos }}</td>
+                            <td>COMPRESOR A/A:</td>
+                            <td>{{ datos.compresor_aa_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>AMORTIGUADORES DELANTEROS:</td>
+                            <td>{{ datos.amortiguadores_delanteros_datos }}</td>
+                            <td>AMORTIGUADORES TRASEROS:</td>
+                            <td>{{ datos.amortiguadores_traseros_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>JUNTAS HOMOCINETICAS:</td>
+                            <td>{{ datos.juntas_homocineticas_datos }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <!-- Additional Information -->
+
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_fugas }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Niveles Section -->
+        <div class="section">
+            <div class="section-title">
+                NIVELES
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>ACEITE MOTOR:</td>
+                            <td>{{ datos.aceite_motor_niveles }}</td>
+                            <td>REFRIGERANTE:</td>
+                            <td>{{ datos.refrigerante_niveles }}</td>
+                        </tr>
+                        <tr>
+                            <td>ACEITE HIDRAULICO:</td>
+                            <td>{{ datos.aceite_hidraulico_niveles }}</td>
+                            <td>LIQUIDO FRENOS:</td>
+                            <td>{{ datos.liquido_frenos_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>LAVAPARABRISAS:</td>
+                            <td>{{ datos.lavaparabrisas_datos }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+    
+                <!-- Additional Information -->
+
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_datos_niveles }}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Testigos Section -->
+        <div class="section">
+            <div class="section-title">
+                TESTIGOS
+            </div>
+            <div class="section-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                            <th>COMPONENTE</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        <tr>
+                            <td>CHECK ENGINE:</td>
+                            <td>{{ datos.check_engine_datos }}</td>
+                            <td>CONTROL TRACCION:</td>
+                            <td>{{ datos.control_traccion_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>TESTIGO ABS:</td>
+                            <td>{{ datos.testigo_abs_datos }}</td>
+                            <td>TESTIGO AIRBAG:</td>
+                            <td>{{ datos.testigo_airbag_datos }}</td>
+                        </tr>
+                        <tr>
+                            <td>TESTIGO FRENOS:</td>
+                            <td>{{ datos.testigo_alerta_frenos }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Additional Information -->
+
+                <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_testigos }}
+                </div> 
+            </div>
+        </div>
+
+        <!-- Rechazado por Politicas Section -->
+        <div class="section">
+            <div class="section-title">
+                RECHAZADO POR POLITICAS
+            </div>
+            <div class="section-content">
+                <div style="margin-top: 6px; padding: 0 12px 20px;">
+                    <strong>RECHAZO:</strong> {{ datos.rechazado_politicas }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <div class="section-title">
+                ACCESORIOS
+            </div>
+            <div class="section-content">
+                <div style="margin-top: 10px; padding: 0 12px 20px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Marca</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for accesorio in accesorios %}
+                            <tr>
+                                <td>{{ accesorio.marca }}</td>
+                                <td>{{ accesorio.descripcion }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                OBSERVACIONES GENERALES
+            </div>
+            <div class="section-content">
+                <div style="margin-top: 10px; padding: 0 12px 20px;">
+                    <p>{{ datos.comentario }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-break"></div>
+
+        <div class="section">
+            <div class="section-title">
+                IMÁGENES
+            </div>
+            <div class="section-content">
+                <div style="margin-top: 10px; padding: 0 12px 20px;">
+                    {% for ruta in datos.imagenes_rutas %}
+                    <img src="{{ ruta }}" alt="Imagen subida">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 4px;margin-bottom: 4px; padding: 3px 2px 0px 4px;">
+            PERITO: {{ datos.perito }}
+        </div>
+        <div style="padding: 0; margin: 0;color: #333333f8;font-size: 12px;">
+            <p>CONSORCIO MUNDIAL Y ESPECIALIZADOS CME <br>Gmail: jcnetcol@gmail.com <br>Telefono:305 8128296 <br>BOGOTA-COLOMBIA</p>
+        </div>
+    </main>
+        
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peritaje Automotriz</title>
+    {% block estilos %}{% endblock %}
+    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <main>
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+    
+    {% block footer %}
+            
+    {% endblock %}
+
+</body>
+</html>

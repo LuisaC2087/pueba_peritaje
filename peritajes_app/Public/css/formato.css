@@ -1,0 +1,121 @@
+@page {
+    margin: 2cm 1.5cm;
+    @top-left {
+        content: "Consorcio Mundial y Especializados      ————————————————————————————————————————————————————————";
+        font-size: 12px;
+        color: #6d6c6c;
+    }
+
+    @bottom-center {
+        content: "Página " counter(page) " de " counter(pages);
+        font-size: 12px;
+        color: #6d6c6c;
+    }
+}
+
+/* Estilo general del cuerpo */
+body {
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.container {
+    width: 100%;
+    margin: 0 ;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    font-family:Helvetica;
+}
+.header h3 {
+    font-size: 18px;
+    margin: 0 25px;
+    text-align:center;
+}
+.date-plate {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+.date-plate div {
+    font-size: 14px;
+}
+.date-plate .plate {
+    color: #ffffff;
+    background-color: #4682b4;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+.section {
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #d9eaf7;
+    border-radius: 8px;
+}
+.section-title {
+    background-color: #4682b4;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    border-radius: 3px 3px 0 0;
+    text-align: center;
+    margin: 0;
+}
+.section-content {
+    padding: 0;
+}
+.section-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.section-content th, .section-content td {
+    padding: 1px 4px;
+    text-align: left;
+    border-bottom: 1px solid #85a2b9;
+    width: 25%;
+}
+.section-content th {
+    background-color: #6d6c6c27;
+}
+.section-content tbody tr th {
+    border-bottom: 1px solid #4682b4;
+}
+
+main {
+    margin-top: 30px; /* Evita superposición con el encabezado */
+    margin-bottom: 50px; /* Evita superposición con el pie de página */
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+img {
+    width: 280px;  /* Ajusta el ancho según necesites */
+    height: auto;  /* Mantiene la proporción */
+    display: inline-block block;
+    margin: 10px; /* Centra la imagen */
+    padding: 5px;
+}
+
+body {
+    position: relative;
+}
+
+.content {
+    position: relative;
+    padding-left: 10px;
+}
+
+.content::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px; /* Grosor de la línea */
+    background-color: black; /* Color de la línea */
+}

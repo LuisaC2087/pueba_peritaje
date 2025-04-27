@@ -1,0 +1,40 @@
+# Archivos de Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Archivos de configuración sensibles
+*.env
+*.secret
+config/settings_local.py
+
+# Archivos de base de datos
+*.sqlite3
+
+# Archivos temporales / logs
+*.log
+*.pot
+*.py[cod]
+*.swp
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+sdist/
+var/
+wheels/
+
+# Archivos de VSCode, PyCharm y otros editores
+.vscode/
+.idea/
+
+# Archivos de migración (opcional, si los regeneras siempre)
+# **/migrations/
+# !**/migrations/__init__.py

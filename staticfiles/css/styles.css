@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff;
+    text-transform: uppercase;
+}
+.fixed-buttons {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.boton {
+    background-color: #add8e6;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.boton:hover {
+    background-color: #4682b4;
+    color: #fff;
+}
+.bot-enviar{
+    display: flex;
+    justify-content: center;
+}
+.boton-envio {
+    font-size: 18px;
+    font-weight:bolder;
+    text-transform: uppercase;
+    background-color: #4682b4;
+    color: #fff;
+    border: none;
+    padding: 15px 90px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 22px;
+    transition: background-color 0.3s;
+    box-shadow: 0 0 5px #00000088;
+}
+.boton-envio:hover {
+    background-color: #4682b4;
+    color: #fff;
+}
+
+    /* Ocultar el input de archivo predeterminado */
+#imagenes {
+    display: none;
+    }
+      /* Estilos para mostrar el nombre de los archivos seleccionados */
+.file-name {
+    margin-left: 10px;
+    font-style: italic;
+    }
+
+.button {
+    background-color: #add8e6;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.img{
+    width:100px ;
+    text-align: center;
+    margin:20px 60px;
+}
+.button:hover {
+    background-color: #4682b4;
+    color: #fff;
+}
+.title-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #add8e6;
+    padding: 10px;
+    width: calc(100% + 40px);
+    margin-left: -20px; /* Adjust for the padding */
+    margin-top: -20px; /* Adjust for the padding */
+    box-sizing: border-box;
+    box-shadow: 0 0 10px #4682b4;
+
+
+}
+.title-header img {
+    width: 50px;
+    height: 50px;
+    margin-right: 40px; /* Move the logo more to the right */
+    margin-left: 40px;
+}
+.title-header h1 {
+    font-size: 25px;
+    font-weight: bold;
+}
+.container {
+    width: 100%;
+    max-width: 800px; /* Reduced max-width for a narrower form */
+    margin: 70px auto;
+}
+.form-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px; /* Increased margin-bottom for more separation */
+    text-align: center;
+    text-transform: uppercase;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+.header input[type="text"] {
+    height: 40px;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding-left: 8px;
+    padding-right: 5px;
+}
+.header input[type="date"] {
+    height: 40px;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding-left: 8px;
+    padding-right: 5px;
+    width: 190px;
+}
+input[type="number"] {
+    height: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 8px;
+    width: 50px;
+    margin-right: 15px;
+}
+input[type="email"]{
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+
+.header .plate {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #add8e6;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.section {
+    margin-bottom: 60px; /* Increased margin for more separation */
+}
+.imagen {
+    margin-bottom: 40px; /* Increased margin for more separation */
+}
+.section-title {
+    background-color: #000000;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 25px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.form-group textarea{
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #fff;
+    text-transform: uppercase;
+}
+.llantas textarea{
+    height: 40px;
+}
+
+.llantas label{
+    width: 200px;
+}
+
+.llantas {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.llantas h3 {
+    margin: 0;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+.nota {
+    margin-left: 10px;
+    resize: none; /* Evitar el cambio de tamaño del textarea */
+}
+.form-group input[type="text"], .form-group select {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #fff;
+    text-transform: uppercase;
+}
+.form-group .checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group .checkbox-group label {
+    margin-bottom: 5px;
+}
+.form-group .checkbox-group input[type="checkbox"] {
+    display: none;
+}
+.form-group .checkbox-group input[type="checkbox"] + label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.form-group .checkbox-group input[type="checkbox"]:checked + label {
+    background-color: #4682b4;
+    color: white;
+    border-color: #4682b4;
+}
+.accesorios {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.accesorios input[name="marca[]"] {
+    width: 100px; /* Cambia el ancho del input para marca */
+    margin-right: 10px;
+}
+.accesorios input[name="descripcion[]"] {
+    flex-grow: 1; /* El campo de descripción se expande para ocupar más espacio */
+}
+.btn-agregar{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.highlight {
+    border: 2px solid #b90a0a;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #b90a0acc;
+    color: #b90a0a;
+
+}
+@media (max-width: 600px) {
+    
+    .title-header img {
+        margin-right: 20px; /* Move the logo more to the right */
+        margin-left: 20px;
+    }
+    .title-header h2 {
+        font-size: 24px;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header h2 {
+        font-size: 20px;
+
+    }
+    .header input[type="text"] {
+        height: 30px;
+        font-size: 14px;
+        width: 60%;
+        margin-left: 20px;
+    }
+    .header input[type="date"] {
+        height: 30px;
+        font-size: 14px;
+        width: 60%;
+        margin-left: 20px;
+    }
+    .header .plate {
+        font-size: 20px;
+        padding: 5px 8px;
+        width: 100%; /* Make the plate full width */
+        box-sizing: border-box;
+        margin-top: 10px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group input[type="text"], .form-group select {
+        padding: 6px;
+    }
+    .llantas input[type="number"]{
+        width: 35px;
+    }
+
+    .llantas label {
+        width: 100%;
+    }
+}
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #d3d3d3;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #4682b4;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #5f9ea0;
+}
+
+.foter_pdf p{
+    padding: 0px;
+    margin: 0;
+    color: #131313e5;
+    font-size: 8px;
+}

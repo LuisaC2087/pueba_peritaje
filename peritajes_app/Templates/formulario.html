@@ -1,0 +1,2962 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block estilos %}<link rel="stylesheet" href="{% static 'css/styles.css' %}">{% endblock %}
+
+{% block title %}Formulario Peritaje{% endblock %}
+
+{% block content %}
+
+    <div class="title-header">
+        <img src="{% static 'img/logo.png' %}" alt="Logo" width="50" height="50">
+        <h1>Consorcio Mundial y Especializados SAS</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="fixed-buttons">
+
+            <button class="button" id="scrollToTop">Ir al Principio</button>
+            <button class="button" id="scrollToBottom">Ir al Final</button>
+        </div>
+
+        <div class="form-title">Peritaje Automotriz</div>
+
+        <form id="peritaje_formulario" enctype="multipart/form-data" action="" method="POST">
+            {% csrf_token %}
+            <div class="header">
+                <div class="plate">
+                    <h2>FECHA: <input type="date" id="fecha" name="fecha" required></h2>
+                </div>
+                <div class="plate">
+                    PLACA: <input type="text" id="placa" name="placa_carro" maxlength="6" minlength="6" required>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">DATOS DE VEHICULO</div>
+                <div class="form-group">
+                    <label for="cliente">CLIENTE:</label>
+                    <input type="text" id="cliente" name="cliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="marca">MARCA:</label>
+                    <input type="text" id="marca" name="marca" required>
+                </div>
+                <div class="form-group">
+                    <label for="modelo">MODELO(AÑO):</label>
+                    <input type="text" id="modelo" name="modelo" inputmode="numeric" maxlength="4" minlength="4" required>
+                </div>
+                <div class="form-group">
+                    <label for="kilometraje">KILOMETRAJE:</label>
+                    <input type="text" id="kilometraje" name="kilometraje" required>
+                </div>
+                <div class="form-group">
+                    <label for="linea">LINEA(VERSIÓN):</label>
+                    <input type="text" id="linea" name="linea" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo_caja">TIPO DE CAJA:</label>
+                    <select id="tipo_caja" name="tipo_caja" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="MECANICA">MECANICA</option>
+                        <option value="AUTOMATICA">AUTOMATICA</option>
+                        <option value="TRIPTONICA">TRIPTONICA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color">COLOR:</label>
+                    <input type="text" id="color" name="color" required>
+                </div>
+                <div class="form-group">
+                    <label for="cilindraje">CILINDRAJE:</label>
+                    <input type="text" id="cilindraje" name="cilindraje" required>
+                </div>
+                <div class="form-group">
+                    <label for="combustible">COMBUSTIBLE:</label>
+                    <select id="combustible" name="combustible" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="GASOLINA">GASOLINA</option>
+                        <option value="GAS">GAS</option>
+                        <option value="DIESEL">DIESEL</option>
+                        <option value="HIBRIDO">HIBRIDO</option>
+                        <option value="ELECTRICO">ELECTRICO</option>
+                        <option value="GAS-GASOLINA">GAS-GASOLINA</option>
+                        <option value="GAS-DIESEL">GAS-DIESEL</option>
+                        <option value="HIDROGENO">HIDROGENO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="servicio">SERVICIO:</label>
+                    <select id="servicio" name="servicio" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="PARTICULAR">PARTICULAR</option>
+                        <option value="PUBLICO">PUBLICO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">CATEGORÍA:</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="LIVIANO">LIVIANO</option>
+                        <option value="PESADO">PESADO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="carroceria">CARROCERÍA:</label>
+                    <select id="carroceria" name="carroceria" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SEDAN">SEDAN</option>
+                        <option value="HATCHBACK">HATCHBACK</option>
+                        <option value="COUPE">COUPE</option>
+                        <option value="PICKUP DC">PICKUP DC</option>
+                        <option value="PICKUP S">PICKUP S</option>
+                        <option value="VAN">VAN</option>
+                        <option value="CAMIONETA 5P">CAMIONETA 5P</option>
+                        <option value="CAMIONETA 3P">CAMIONETA 3P</option>
+                        <option value="TRACTOCAMION">TRACTOCAMION</option>
+                        <option value="CAMION">CAMION</option>
+                        <option value="VOLCO">VOLCO</option>
+                        <option value="CHASIS">CHASIS</option>
+                        <option value="BUS">BUS</option>
+                        <option value="TRAILER">TRAILER</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">LATONERIA Y PINTURA</div>
+                <div class="form-group">
+                    <label for="capot_bueno">CAPOT:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 11">
+                        <input type="checkbox" id="capot_bueno" name="capot[]" value="BUENO">
+                        <label for="capot_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="capot_rayado" name="capot[]" value="RAYADO">
+                        <label for="capot_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="capot_sumido" name="capot[]" value="SUMIDO">
+                        <label for="capot_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="capot_oxidado" name="capot[]" value="OXIDADO">
+                        <label for="capot_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="capot_quemado" name="capot[]" value="QUEMADO">
+                        <label for="capot_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="capot_buena_reparacion" name="capot[]" value="BUENA REPARACION">
+                        <label for="capot_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="capot_mala_reparacion" name="capot[]" value="MALA REPARACION">
+                        <label for="capot_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="capot_deformacion_leve" name="capot[]" value="DEFORMACION LEVE">
+                        <label for="capot_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="capot_deformacion_fuerte" name="capot[]" value="DEFORMACION FUERTE">
+                        <label for="capot_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="capot_contaminacion_p" name="capot[]" value="CONTAMINACION DE PINTURA">
+                        <label for="capot_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="capot_N/A" name="capot[]" value="N/A">
+                        <label for="capot_N/A">N/A</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="torpedo">AREA MOTOR/PARALLAMAS:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 1">
+                        <input type="checkbox" id="torpedo_bueno" name="torpedo[]" value="BUENO">
+                        <label for="torpedo_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="torpedo_rayado" name="torpedo[]" value="RAYADO">
+                        <label for="torpedo_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="torpedo_sumido" name="torpedo[]" value="SUMIDO">
+                        <label for="torpedo_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="torpedo_oxidado" name="torpedo[]" value="OXIDADO">
+                        <label for="torpedo_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="torpedo_quemado" name="torpedo[]" value="QUEMADO">
+                        <label for="torpedo_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="torpedo_buena_reparacion" name="torpedo[]" value="BUENA REPARACION">
+                        <label for="torpedo_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="torpedo_mala_reparacion" name="torpedo[]" value="MALA REPARACION">
+                        <label for="torpedo_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="torpedo_deformacion_leve" name="torpedo[]" value="DEFORMACION LEVE">
+                        <label for="torpedo_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="torpedo_deformacion_fuerte" name="torpedo[]" value="DEFORMACION FUERTE">
+                        <label for="torpedo_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="torpedo_contaminacion_p" name="torpedo[]" value="CONTAMINACION DE PINTURA">
+                        <label for="torpedo_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="torpedo_N/A" name="torpedo[]" value="N/A">
+                        <label for="torpedo_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bomper_del">BOMPER DEL:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 4">
+                        <input type="checkbox" id="bomper_del_bueno" name="bomper_del[]" value="BUENO">
+                        <label for="bomper_del_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="bomper_del_rayado" name="bomper_del[]" value="RAYADO">
+                        <label for="bomper_del_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="bomper_del_sumido" name="bomper_del[]" value="SUMIDO">
+                        <label for="bomper_del_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="bomper_del_oxidado" name="bomper_del[]" value="OXIDADO">
+                        <label for="bomper_del_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="bomper_del_quemado" name="bomper_del[]" value="QUEMADO">
+                        <label for="bomper_del_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="bomper_del_buena_reparacion" name="bomper_del[]" value="BUENA REPARACION">
+                        <label for="bomper_del_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="bomper_del_mala_reparacion" name="bomper_del[]" value="MALA REPARACION">
+                        <label for="bomper_del_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="bomper_del_deformacion_leve" name="bomper_del[]" value="DEFORMACION LEVE">
+                        <label for="bomper_del_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="bomper_del_deformacion_fuerte" name="bomper_del[]" value="DEFORMACION FUERTE">
+                        <label for="bomper_del_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="bomper_del_contaminacion_p" name="bomper_del[]" value="CONTAMINACION DE PINTURA">
+                        <label for="bomper_del_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="bomper_del_N/A" name="bomper_del[]" value="N/A">
+                        <label for="bomper_del_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guarda_fango">GUARDABARRO DEL IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 5">
+                        <input type="checkbox" id="guarda_fango_bueno" name="guarda_fango[]" value="BUENO">
+                        <label for="guarda_fango_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="guarda_fango_rayado" name="guarda_fango[]" value="RAYADO">
+                        <label for="guarda_fango_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="guarda_fango_sumido" name="guarda_fango[]" value="SUMIDO">
+                        <label for="guarda_fango_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="guarda_fango_oxidado" name="guarda_fango[]" value="OXIDADO">
+                        <label for="guarda_fango_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="guarda_fango_quemado" name="guarda_fango[]" value="QUEMADO">
+                        <label for="guarda_fango_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="guarda_fango_buena_reparacion" name="guarda_fango[]" value="BUENA REPARACION">
+                        <label for="guarda_fango_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="guarda_fango_mala_reparacion" name="guarda_fango[]" value="MALA REPARACION">
+                        <label for="guarda_fango_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="guarda_fango_deformacion_leve" name="guarda_fango[]" value="DEFORMACION LEVE">
+                        <label for="guarda_fango_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="guarda_fango_deformacion_fuerte" name="guarda_fango[]" value="DEFORMACION FUERTE">
+                        <label for="guarda_fango_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="guarda_fango_contaminacion_p" name="guarda_fango[]" value="CONTAMINACION DE PINTURA">
+                        <label for="guarda_fango_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="guarda_fango_N/A" name="guarda_fango[]" value="N/A">
+                        <label for="guarda_fango_N/A">N/A</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="estribo_izq">ESTRIBO IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 12">
+                        <input type="checkbox" id="estribo_izq_bueno" name="estribo_izq[]" value="BUENO">
+                        <label for="estribo_izq_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="estribo_izq_rayado" name="estribo_izq[]" value="RAYADO">
+                        <label for="estribo_izq_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="estribo_izq_sumido" name="estribo_izq[]" value="SUMIDO">
+                        <label for="estribo_izq_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="estribo_izq_oxidado" name="estribo_izq[]" value="OXIDADO">
+                        <label for="estribo_izq_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="estribo_izq_quemado" name="estribo_izq[]" value="QUEMADO">
+                        <label for="estribo_izq_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="estribo_izq_buena_reparacion" name="estribo_izq[]" value="BUENA REPARACION">
+                        <label for="estribo_izq_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="estribo_izq_mala_reparacion" name="estribo_izq[]" value="MALA REPARACION">
+                        <label for="estribo_izq_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="estribo_izq_deformacion_leve" name="estribo_izq[]" value="DEFORMACION LEVE">
+                        <label for="estribo_izq_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="estribo_izq_deformacion_fuerte" name="estribo_izq[]" value="DEFORMACION FUERTE">
+                        <label for="estribo_izq_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="estribo_izq_contaminacion_p" name="estribo_izq[]" value="CONTAMINACION DE PINTURA">
+                        <label for="estribo_izq_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="estribo_izq_N/A" name="estribo_izq[]" value="N/A">
+                        <label for="estribo_izq_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="puerta_del_izq">PUERTA DEL IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 8">
+                        <input type="checkbox" id="puerta_del_izq_bueno" name="puerta_del_izq[]" value="BUENA">
+                        <label for="puerta_del_izq_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_rayado" name="puerta_del_izq[]" value="RAYADA">
+                        <label for="puerta_del_izq_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_sumido" name="puerta_del_izq[]" value="SUMIDA">
+                        <label for="puerta_del_izq_sumido">SUMIDA</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_oxidado" name="puerta_del_izq[]" value="OXIDADA">
+                        <label for="puerta_del_izq_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_quemado" name="puerta_del_izq[]" value="QUEMADA">
+                        <label for="puerta_del_izq_quemado">QUEMADA</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_buena_reparacion" name="puerta_del_izq[]" value="BUENA REPARACION">
+                        <label for="puerta_del_izq_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_mala_reparacion" name="puerta_del_izq[]" value="MALA REPARACION">
+                        <label for="puerta_del_izq_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_deformacion_leve" name="puerta_del_izq[]" value="DEFORMACION LEVE">
+                        <label for="puerta_del_izq_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="puerta_del_izq_deformacion_fuerte" name="puerta_del_izq[]" value="DEFORMACION FUERTE">
+                        <label for="puerta_del_izq_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="puerta_del_izq_contaminacion_p" name="puerta_del_izq[]" value="CONTAMINACION DE PINTURA">
+                        <label for="puerta_del_izq_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="puerta_del_izqN/A" name="puerta_del_izq[]" value="N/A">
+                        <label for="puerta_del_izqN/A">N/A</label>
+                    </div>  
+                </div>
+
+                <div class="form-group">
+                    <label for="puerta_trasera_izq">PUERTA TRASERA IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 6">
+                        <input type="checkbox" id="puerta_trasera_izq_bueno" name="puerta_trasera_izq[]" value="BUENA">
+                        <label for="puerta_trasera_izq_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_rayado" name="puerta_trasera_izq[]" value="RAYADA">
+                        <label for="puerta_trasera_izq_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_sumido" name="puerta_trasera_izq[]" value="SUMIDA">
+                        <label for="puerta_trasera_izq_sumido">SUMIDA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_oxidado" name="puerta_trasera_izq[]" value="OXIDADA">
+                        <label for="puerta_trasera_izq_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_quemado" name="puerta_trasera_izq[]" value="QUEMADA">
+                        <label for="puerta_trasera_izq_quemado">QUEMADA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_buena_reparacion" name="puerta_trasera_izq[]" value="BUENA REPARACION">
+                        <label for="puerta_trasera_izq_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_mala_reparacion" name="puerta_trasera_izq[]" value="MALA REPARACION">
+                        <label for="puerta_trasera_izq_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_deformacion_leve" name="puerta_trasera_izq[]" value="DEFORMACION LEVE">
+                        <label for="puerta_trasera_izq_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="puerta_trasera_izq_deformacion_fuerte" name="puerta_trasera_izq[]" value="DEFORMACION FUERTE">
+                        <label for="puerta_trasera_izq_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="puerta_trasera_izq_contaminacion_p" name="puerta_trasera_izq[]" value="CONTAMINACION DE PINTURA">
+                        <label for="puerta_trasera_izq_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="puerta_trasera_izq_N/A" name="puerta_trasera_izq[]" value="N/A">
+                        <label for="puerta_trasera_izq_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guardabarro_tras_izq">GUARDABARRO TRAS IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 16">
+                        <input type="checkbox" id="guardabarro_tras_izq_bueno" name="guardabarro_tras_izq[]" value="BUENO">
+                        <label for="guardabarro_tras_izq_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_rayado" name="guardabarro_tras_izq[]" value="RAYADO">
+                        <label for="guardabarro_tras_izq_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_sumido" name="guardabarro_tras_izq[]" value="SUMIDO">
+                        <label for="guardabarro_tras_izq_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_oxidado" name="guardabarro_tras_izq[]" value="OXIDADO">
+                        <label for="guardabarro_tras_izq_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_quemado" name="guardabarro_tras_izq[]" value="QUEMADO">
+                        <label for="guardabarro_tras_izq_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_buena_reparacion" name="guardabarro_tras_izq[]" value="BUENA REPARACION">
+                        <label for="guardabarro_tras_izq_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_mala_reparacion" name="guardabarro_tras_izq[]" value="MALA REPARACION">
+                        <label for="guardabarro_tras_izq_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_deformacion_leve" name="guardabarro_tras_izq[]" value="DEFORMACION LEVE">
+                        <label for="guardabarro_tras_izq_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="guardabarro_tras_izq_deformacion_fuerte" name="guardabarro_tras_izq[]" value="DEFORMACION FUERTE">
+                        <label for="guardabarro_tras_izq_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="guardabarro_tras_izq_contaminacion_P" name="guardabarro_tras_izq[]" value="CONTAMINACION DE PINTURA">
+                        <label for="guardabarro_tras_izq_contaminacion_P">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="guardabarro_tras_izq_N/A" name="guardabarro_tras_izq[]" value="N/A">
+                        <label for="guardabarro_tras_izq_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bomper_tra">BOMPER TRA:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 15">
+                        <input type="checkbox" id="bomper_tra_bueno" name="bomper_tra[]" value="BUENO">
+                        <label for="bomper_tra_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="bomper_tra_rayado" name="bomper_tra[]" value="RAYADO">
+                        <label for="bomper_tra_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="bomper_tra_sumido" name="bomper_tra[]" value="SUMIDO">
+                        <label for="bomper_tra_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="bomper_tra_oxidado" name="bomper_tra[]" value="OXIDADO">
+                        <label for="bomper_tra_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="bomper_tra_quemado" name="bomper_tra[]" value="QUEMADO">
+                        <label for="bomper_tra_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="bomper_tra_buena_reparacion" name="bomper_tra[]" value="BUENA REPARACION">
+                        <label for="bomper_tra_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="bomper_tra_mala_reparacion" name="bomper_tra[]" value="MALA REPARACION">
+                        <label for="bomper_tra_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="bomper_tra_deformacion_leve" name="bomper_tra[]" value="DEFORMACION LEVE">
+                        <label for="bomper_tra_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="bomper_tra_deformacion_fuerte" name="bomper_tra[]" value="DEFORMACION FUERTE">
+                        <label for="bomper_tra_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="bomper_tra_contaminacion_p" name="bomper_tra[]" value="CONTAMINACION DE PINTURA">
+                        <label for="bomper_tra_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="bomper_tra_N/A" name="bomper_tra[]" value="N/A">
+                        <label for="bomper_tra_N/A">N/A</label>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="tapa_baul">TAPA BAUL/QUINTA PUERTA:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 10">
+                        <input type="checkbox" id="tapa_baul_bueno" name="tapa_baul[]" value="BUENA">
+                        <label for="tapa_baul_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="tapa_baul_rayado" name="tapa_baul[]" value="RAYADA">
+                        <label for="tapa_baul_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="tapa_baul_sumido" name="tapa_baul[]" value="SUMIDA">
+                        <label for="tapa_baul_sumido">SUMIDA</label>
+                
+                        <input type="checkbox" id="tapa_baul_oxidado" name="tapa_baul[]" value="OXIDADA">
+                        <label for="tapa_baul_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="tapa_baul_quemado" name="tapa_baul[]" value="QUEMADA">
+                        <label for="tapa_baul_quemado">QUEMADA</label>
+                
+                        <input type="checkbox" id="tapa_baul_buena_reparacion" name="tapa_baul[]" value="BUENA REPARACION">
+                        <label for="tapa_baul_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="tapa_baul_mala_reparacion" name="tapa_baul[]" value="MALA REPARACION">
+                        <label for="tapa_baul_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="tapa_baul_deformacion_leve" name="tapa_baul[]" value="DEFORMACION LEVE">
+                        <label for="tapa_baul_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="tapa_baul_deformacion_fuerte" name="tapa_baul[]" value="DEFORMACION FUERTE">
+                        <label for="tapa_baul_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="tapa_baul_contaminacion_p" name="tapa_baul[]" value="CONTAMINACION DE PINTURA">
+                        <label for="tapa_baul_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="tapa_baul_N/A" name="tapa_baul[]" value="N/A">
+                        <label for="tapa_baul_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guardafango_der">GUARDABARRO TRA DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 16">
+                        <input type="checkbox" id="guardafango_der_bueno" name="guardafango_der[]" value="BUENO">
+                        <label for="guardafango_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="guardafango_der_rayado" name="guardafango_der[]" value="RAYADO">
+                        <label for="guardafango_der_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="guardafango_der_sumido" name="guardafango_der[]" value="SUMIDO">
+                        <label for="guardafango_der_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="guardafango_der_oxidado" name="guardafango_der[]" value="OXIDADO">
+                        <label for="guardafango_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="guardafango_der_quemado" name="guardafango_der[]" value="QUEMADO">
+                        <label for="guardafango_der_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="guardafango_der_buena_reparacion" name="guardafango_der[]" value="BUENA REPARACION">
+                        <label for="guardafango_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="guardafango_der_mala_reparacion" name="guardafango_der[]" value="MALA REPARACION">
+                        <label for="guardafango_der_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="guardafango_der_deformacion_leve" name="guardafango_der[]" value="DEFORMACION LEVE">
+                        <label for="guardafango_der_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="guardafango_der_deformacion_fuerte" name="guardafango_der[]" value="DEFORMACION FUERTE">
+                        <label for="guardafango_der_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="guardafango_der_contaminacion_p" name="guardafango_der[]" value="CONTAMINCION DE PINTURA">
+                        <label for="guardafango_der_contaminacion_p">CONTAMINCION DE PINTURA</label>
+
+                        <input type="checkbox" id="guardafango_der_N/A" name="guardafango_der[]" value="N/A">
+                        <label for="guardafango_der_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="puerta_trasera_der">PUERTA TRASERA DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 17">
+                        <input type="checkbox" id="puerta_trasera_der_bueno" name="puerta_trasera_der[]" value="BUENA">
+                        <label for="puerta_trasera_der_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_rayado" name="puerta_trasera_der[]" value="RAYADA">
+                        <label for="puerta_trasera_der_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_sumido" name="puerta_trasera_der[]" value="SUMIDA">
+                        <label for="puerta_trasera_der_sumido">SUMIDA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_oxidado" name="puerta_trasera_der[]" value="OXIDADA">
+                        <label for="puerta_trasera_der_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_quemado" name="puerta_trasera_der[]" value="QUEMADA">
+                        <label for="puerta_trasera_der_quemado">QUEMADA</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_buena_reparacion" name="puerta_trasera_der[]" value="BUENA REPARACION">
+                        <label for="puerta_trasera_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_mala_reparacion" name="puerta_trasera_der[]" value="MALA REPARACION">
+                        <label for="puerta_trasera_der_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_deformacion_leve" name="puerta_trasera_der[]" value="DEFORMACION LEVE">
+                        <label for="puerta_trasera_der_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="puerta_trasera_der_deformacion_fuerte" name="puerta_trasera_der[]" value="DEFORMACION FUERTE">
+                        <label for="puerta_trasera_der_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="puerta_trasera_der_contaminacion_p" name="puerta_trasera_der[]" value="CONTAMINACION DE PINTURA">
+                        <label for="puerta_trasera_der_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="puerta_trasera_der_N/A" name="puerta_trasera_der[]" value="N/A">
+                        <label for="puerta_trasera_der_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="estribo_der">ESTRIBO DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 2">
+                        <input type="checkbox" id="estribo_der_bueno" name="estribo_der[]" value="BUENO">
+                        <label for="estribo_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="estribo_der_rayado" name="estribo_der[]" value="RAYADO">
+                        <label for="estribo_der_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="estribo_der_sumido" name="estribo_der[]" value="SUMIDO">
+                        <label for="estribo_der_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="estribo_der_oxidado" name="estribo_der[]" value="OXIDADO">
+                        <label for="estribo_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="estribo_der_quemado" name="estribo_der[]" value="QUEMADO">
+                        <label for="estribo_der_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="estribo_der_buena_reparacion" name="estribo_der[]" value="BUENA REPARACION">
+                        <label for="estribo_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="estribo_der_mala_reparacion" name="estribo_der[]" value="MALA REPARACION">
+                        <label for="estribo_der_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="estribo_der_deformacion_leve" name="estribo_der[]" value="DEFORMACION LEVE">
+                        <label for="estribo_der_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="estribo_der_deformacion_fuerte" name="estribo_der[]" value="DEFORMACION FUERTE">
+                        <label for="estribo_der_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="estribo_der_contaminacion_p" name="estribo_der[]" value="CONTAMINACION DE PINTURA">
+                        <label for="estribo_der_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="estribo_der_N/A" name="estribo_der[]" value="N/A">
+                        <label for="estribo_der_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="puerta_de_der">PUERTA DEL DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 19">
+                        <input type="checkbox" id="puerta_de_der_bueno" name="puerta_de_der[]" value="BUENA">
+                        <label for="puerta_de_der_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="puerta_de_der_rayado" name="puerta_de_der[]" value="RAYADA">
+                        <label for="puerta_de_der_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="puerta_de_der_sumido" name="puerta_de_der[]" value="SUMIDA">
+                        <label for="puerta_de_der_sumido">SUMIDA</label>
+                
+                        <input type="checkbox" id="puerta_de_der_oxidado" name="puerta_de_der[]" value="OXIDADA">
+                        <label for="puerta_de_der_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="puerta_de_der_quemado" name="puerta_de_der[]" value="QUEMADA">
+                        <label for="puerta_de_der_quemado">QUEMADA</label>
+                
+                        <input type="checkbox" id="puerta_de_der_buena_reparacion" name="puerta_de_der[]" value="BUENA REPARACION">
+                        <label for="puerta_de_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_de_der_mala_reparacion" name="puerta_de_der[]" value="MALA REPARACION">
+                        <label for="puerta_de_der_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="puerta_de_der_deformacion_leve" name="puerta_de_der[]" value="DEFORMACION LEVE">
+                        <label for="puerta_de_der_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="puerta_de_der_deformacion_fuerte" name="puerta_de_der[]" value="DEFORMACION FUERTE">
+                        <label for="puerta_de_der_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="puerta_de_der_contaminacion_p" name="puerta_de_der[]" value="CONTAMINACION DE PINTURA">
+                        <label for="puerta_de_der_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="puerta_de_der_N/A" name="puerta_de_der[]" value="N/A">
+                        <label for="puerta_de_der_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guardabarro_del_der">GUARDABARRO DEL DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 19">
+                        <input type="checkbox" id="guardabarro_del_der_bueno" name="guardabarro_del_der[]" value="BUENO">
+                        <label for="guardabarro_del_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_rayado" name="guardabarro_del_der[]" value="RAYADO">
+                        <label for="guardabarro_del_der_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_sumido" name="guardabarro_del_der[]" value="SUMIDO">
+                        <label for="guardabarro_del_der_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_oxidado" name="guardabarro_del_der[]" value="OXIDADO">
+                        <label for="guardabarro_del_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_quemado" name="guardabarro_del_der[]" value="QUEMADO">
+                        <label for="guardabarro_del_der_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_buena_reparacion" name="guardabarro_del_der[]" value="BUENA REPARACION">
+                        <label for="guardabarro_del_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_mala_reparacion" name="guardabarro_del_der[]" value="MALA REPARACION">
+                        <label for="guardabarro_del_der_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_deformacion_leve" name="guardabarro_del_der[]" value="DEFORMACION LEVE">
+                        <label for="guardabarro_del_der_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="guardabarro_del_der_deformacion_fuerte" name="guardabarro_del_der[]" value="DEFORMACION FUERTE">
+                        <label for="guardabarro_del_der_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="guardabarro_del_der_contaminacion_p" name="guardabarro_del_der[]" value="CONTAMINACION DE PINTURA">
+                        <label for="guardabarro_del_der_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="guardabarro_del_der_N/A" name="guardabarro_del_der[]" value="N/A">
+                        <label for="guardabarro_del_der_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="costado_der">COSTADO DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 18">
+                        <input type="checkbox" id="costado_der_bueno" name="costado_der[]" value="BUENO">
+                        <label for="costado_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="costado_der_rayado" name="costado_der[]" value="RAYADO">
+                        <label for="costado_der_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="costado_der_sumido" name="costado_der[]" value="SUMIDO">
+                        <label for="costado_der_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="costado_der_oxidado" name="costado_der[]" value="OXIDADO">
+                        <label for="costado_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="costado_der_quemado" name="costado_der[]" value="QUEMADO">
+                        <label for="costado_der_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="costado_der_buena_reparacion" name="costado_der[]" value="BUENA REPARACION">
+                        <label for="costado_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="costado_der_mala_reparacion" name="costado_der[]" value="MALA REPARACION">
+                        <label for="costado_der_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="costado_der_deformacion_leve" name="costado_der[]" value="DEFORMACION LEVE">
+                        <label for="costado_der_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="costado_der_deformacion_fuerte" name="costado_der[]" value="DEFORMACION FUERTE">
+                        <label for="costado_der_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="costado_der_contaminacion_P" name="costado_der[]" value="CONTAMINACION DE PINTURA">
+                        <label for="costado_der_contaminacion_P">CONTAMINACION DE PINTURA</label>
+
+
+                        <input type="checkbox" id="costado_der_N/A" name="costado_der[]" value="N/A">
+                        <label for="costado_der_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="capota">CAPOTA/TECHO:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 21">
+                        <input type="checkbox" id="capota_bueno" name="capota[]" value="BUENA">
+                        <label for="capota_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="capota_rayado" name="capota[]" value="RAYADA">
+                        <label for="capota_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="capota_sumido" name="capota[]" value="SUMIDA">
+                        <label for="capota_sumido">SUMIDA</label>
+                
+                        <input type="checkbox" id="capota_oxidado" name="capota[]" value="OXIDADA">
+                        <label for="capota_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="capota_quemado" name="capota[]" value="QUEMADA">
+                        <label for="capota_quemado">QUEMADA</label>
+                
+                        <input type="checkbox" id="capota_buena_reparacion" name="capota[]" value="BUENA REPARACION">
+                        <label for="capota_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="capota_mala_reparacion" name="capota[]" value="MALA REPARACION">
+                        <label for="capota_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="capota_deformacion_leve" name="capota[]" value="DEFORMACION LEVE">
+                        <label for="capota_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="capota_deformacion_fuerte" name="capota[]" value="DEFORMACION FUERTE">
+                        <label for="capota_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="capota_contaminacion_p" name="capota[]" value="CONTAMINACION DE PINTURA">
+                        <label for="capota_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="capota_N/A" name="capota[]" value="N/A">
+                        <label for="capota_N/A">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="costado_izq">COSTADO IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 7">
+                        <input type="checkbox" id="costado_izq_bueno" name="costado_izq[]" value="BUENO">
+                        <label for="costado_izq_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="costado_izq_rayado" name="costado_izq[]" value="RAYADO">
+                        <label for="costado_izq_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="costado_izq_sumido" name="costado_izq[]" value="SUMIDO">
+                        <label for="costado_izq_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="costado_izq_oxidado" name="costado_izq[]" value="OXIDADO">
+                        <label for="costado_izq_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="costado_izq_quemado" name="costado_izq[]" value="QUEMADO">
+                        <label for="costado_izq_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="costado_izq_buena_reparacion" name="costado_izq[]" value="BUENA REPARACION">
+                        <label for="costado_izq_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="costado_izq_mala_reparacion" name="costado_izq[]" value="MALA REPARACION">
+                        <label for="costado_izq_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="costado_izq_deformacion_leve" name="costado_izq[]" value="DEFORMACION LEVE">
+                        <label for="costado_izq_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="costado_izq_deformacion_fuerte" name="costado_izq[]" value="DEFORMACION FUERTE">
+                        <label for="costado_izq_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="costado_izq_contaminacion_p" name="costado_izq[]" value="CONTAMINACION DE PINTURA">
+                        <label for="costado_izq_contaminacion_p">CONTAMINACION DE PINTURA</label>
+
+                        <input type="checkbox" id="costado_izq_N/A" name="costado_izq[]" value="N/A">
+                        <label for="costado_izq_N/A">N/A</label>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="section">
+                <div class="section-title">CHASIS</div>
+
+                <div class="form-group">
+                    <label for="alma_bomper_tra">ALMA BOMPER TRA:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección s">
+                        <input type="checkbox" id="alma_bomper_tra_bueno" name="alma_bomper_tra[]" value="BUENO">
+                        <label for="alma_bomper_tra_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_rayado" name="alma_bomper_tra[]" value="RAYADO">
+                        <label for="alma_bomper_tra_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_sumido" name="alma_bomper_tra[]" value="SUMIDO">
+                        <label for="alma_bomper_tra_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_oxidado" name="alma_bomper_tra[]" value="OXIDADO">
+                        <label for="alma_bomper_tra_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_quemado" name="alma_bomper_tra[]" value="QUEMADO">
+                        <label for="alma_bomper_tra_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_buena_reparacion" name="alma_bomper_tra[]" value="BUENA REPARACION">
+                        <label for="alma_bomper_tra_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_mala_reparacion" name="alma_bomper_tra[]" value="MALA REPARACION">
+                        <label for="alma_bomper_tra_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_deformacion_leve" name="alma_bomper_tra[]" value="DEFORMACION LEVE">
+                        <label for="alma_bomper_tra_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="alma_bomper_tra_deformacion_fuerte" name="alma_bomper_tra[]" value="DEFORMACION FUERTE">
+                        <label for="alma_bomper_tra_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="alma_bomper_tra_N/A" name="alma_bomper_tra[]" value="N/A">
+                        <label for="alma_bomper_tra_N/A">N/A</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="alma_bomper_del">ALMA BOMPER DEL:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 9">
+                        <input type="checkbox" id="alma_bomper_del_bueno" name="alma_bomper_del[]" value="BUENO">
+                        <label for="alma_bomper_del_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_rayado" name="alma_bomper_del[]" value="RAYADO">
+                        <label for="alma_bomper_del_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_sumido" name="alma_bomper_del[]" value="SUMIDO">
+                        <label for="alma_bomper_del_sumido">SUMIDO</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_oxidado" name="alma_bomper_del[]" value="OXIDADO">
+                        <label for="alma_bomper_del_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_quemado" name="alma_bomper_del[]" value="QUEMADO">
+                        <label for="alma_bomper_del_quemado">QUEMADO</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_buena_reparacion" name="alma_bomper_del[]" value="BUENA REPARACION">
+                        <label for="alma_bomper_del_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_mala_reparacion" name="alma_bomper_del[]" value="MALA REPARACION">
+                        <label for="alma_bomper_del_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_deformacion_leve" name="alma_bomper_del[]" value="DEFORMACION LEVE">
+                        <label for="alma_bomper_del_deformacion_leve">DEFORMACION LEVE</label>
+                
+                        <input type="checkbox" id="alma_bomper_del_deformacion_fuerte" name="alma_bomper_del[]" value="DEFORMACION FUERTE">
+                        <label for="alma_bomper_del_deformacion_fuerte">DEFORMACION FUERTE</label>
+
+                        <input type="checkbox" id="alma_bomper_del_N/A<" name="alma_bomper_del[]" value="N/A">
+                        <label for="alma_bomper_del_N/A<">N/A</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="punta_chasis_del_der">PUNTA CHASIS DEL. DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 22">
+                        <input type="checkbox" id="punta_chasis_del_bueno" name="punta_chasis_del[]" value="BUENO">
+                        <label for="punta_chasis_del_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_perforado" name="punta_chasis_del[]" value="PERFORADO">
+                        <label for="punta_chasis_del_perforado">PERFORADO</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_oxidado" name="punta_chasis_del[]" value="OXIDADO">
+                        <label for="punta_chasis_del_oxidado">OXIDADO</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_golpeado" name="punta_chasis_del[]" value="GOLPEADO">
+                        <label for="punta_chasis_del_golpeado">GOLPEADO</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_deformado" name="punta_chasis_del[]" value="DEFORMADO">
+                        <label for="punta_chasis_del_deformado">DEFORMADO</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_buena_reparacion" name="punta_chasis_del[]" value="BUENA REPARACION">
+                        <label for="punta_chasis_del_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_mala_reparacion" name="punta_chasis_del[]" value="MALA REPARACION">
+                        <label for="punta_chasis_del_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="punta_chasis_del_N/A<" name="punta_chasis_del[]" value="N/A">
+                        <label for="punta_chasis_del_N/A<">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="traviesa_superior">TRAVIESA SUPERIOR:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 23">
+                        <input type="checkbox" id="traviesa_superior_bueno" name="traviesa_superior[]" value="BUENA">
+                        <label for="traviesa_superior_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="traviesa_superior_perforado" name="traviesa_superior[]" value="PERFORADA">
+                        <label for="traviesa_superior_perforado">PERFORADA</label>
+                
+                        <input type="checkbox" id="traviesa_superior_oxidado" name="traviesa_superior[]" value="OXIDADA">
+                        <label for="traviesa_superior_oxidado">OXIDADA</label>
+                
+                        <input type="checkbox" id="traviesa_superior_golpeado" name="traviesa_superior[]" value="GOLPEADA">
+                        <label for="traviesa_superior_golpeado">GOLPEADA</label>
+                
+                        <input type="checkbox" id="traviesa_superior_deformado" name="traviesa_superior[]" value="DEFORMADA">
+                        <label for="traviesa_superior_deformado">DEFORMADA</label>
+                
+                        <input type="checkbox" id="traviesa_superior_buena_reparacion" name="traviesa_superior[]" value="BUENA REPARACION">
+                        <label for="traviesa_superior_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="traviesa_superior_mala_reparacion" name="traviesa_superior[]" value="MALA REPARACION">
+                        <label for="traviesa_superior_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="traviesa_superior_N/A" name="traviesa_superior[]" value="N/A">
+                        <label for="traviesa_superior_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="polvo_met_del_der">G/POLVO MET. DEL. DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 24">
+                        <input type="checkbox" id="polvo_met_del_der_bueno" name="polvo_met_del_der[]" value="BUENO">
+                        <label for="polvo_met_del_der_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="polvo_met_del_der_perforado" name="polvo_met_del_der[]" value="PERFORADO">
+                        <label for="polvo_met_del_der_perforado">PERFORADO</label>
+                        
+                        <input type="checkbox" id="polvo_met_del_der_oxidado" name="polvo_met_del_der[]" value="OXIDADO">
+                        <label for="polvo_met_del_der_oxidado">OXIDADO</label>
+                        
+                        <input type="checkbox" id="polvo_met_del_der_golpeado" name="polvo_met_del_der[]" value="GOLPEADO">
+                        <label for="polvo_met_del_der_golpeado">GOLPEADO</label>
+                        
+                        <input type="checkbox" id="polvo_met_del_der_deformado" name="polvo_met_del_der[]" value="DEFORMADO">
+                        <label for="polvo_met_del_der_deformado">DEFORMADO</label>
+                        
+                        <input type="checkbox" id="polvo_met_del_der_buena_reparacion" name="polvo_met_del_der[]" value="BUENA REPARACION">
+                        <label for="polvo_met_del_der_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="polvo_met_del_der_mala_reparacion" name="polvo_met_del_der[]" value="MALA REPARACION">
+                        <label for="polvo_met_del_der_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="polvo_met_del_der_N/A" name="polvo_met_del_der[]" value="N/A">
+                        <label for="polvo_met_del_der_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paral_pano_der">PARAL PANO. DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 25">
+                        <input type="checkbox" id="paral_pano_der_bueno" name="paral_pano_der[]" value="BUENO">
+                        <label for="paral_pano_der_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="paral_pano_der_perforado" name="paral_pano_der[]" value="PERFORADO">
+                        <label for="paral_pano_der_perforado">PERFORADO</label>
+                        
+                        <input type="checkbox" id="paral_pano_der_oxidado" name="paral_pano_der[]" value="OXIDADO">
+                        <label for="paral_pano_der_oxidado">OXIDADO</label>
+                        
+                        <input type="checkbox" id="paral_pano_der_golpeado" name="paral_pano_der[]" value="GOLPEADO">
+                        <label for="paral_pano_der_golpeado">GOLPEADO</label>
+                        
+                        <input type="checkbox" id="paral_pano_der_deformado" name="paral_pano_der[]" value="DEFORMADO">
+                        <label for="paral_pano_der_deformado">DEFORMADO</label>
+                        
+                        <input type="checkbox" id="paral_pano_der_buena_reparacion" name="paral_pano_der[]" value="BUENA REPARACION">
+                        <label for="paral_pano_der_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="paral_pano_der_mala_reparacion" name="paral_pano_der[]" value="MALA REPARACION">
+                        <label for="paral_pano_der_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="paral_pano_der_N/A" name="paral_pano_der[]" value="N/A">
+                        <label for="paral_pano_der_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paral_pta_der">PARAL PTA. DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 26">
+                        <input type="checkbox" id="paral_pta_der_bueno" name="paral_pta_der[]" value="BUENO">
+                        <label for="paral_pta_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="paral_pta_der_perforado" name="paral_pta_der[]" value="PERFORADO">
+                        <label for="paral_pta_der_perforado">PERFORADO</label>
+                
+                        <input type="checkbox" id="paral_pta_der_oxidado" name="paral_pta_der[]" value="OXIDADO">
+                        <label for="paral_pta_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="paral_pta_der_golpeado" name="paral_pta_der[]" value="GOLPEADO">
+                        <label for="paral_pta_der_golpeado">GOLPEADO</label>
+                
+                        <input type="checkbox" id="paral_pta_der_deformado" name="paral_pta_der[]" value="DEFORMADO">
+                        <label for="paral_pta_der_deformado">DEFORMADO</label>
+                
+                        <input type="checkbox" id="paral_pta_der_buena_reparacion" name="paral_pta_der[]" value="BUENA REPARACION">
+                        <label for="paral_pta_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="paral_pta_der_mala_reparacion" name="paral_pta_der[]" value="MALA REPARACION">
+                        <label for="paral_pta_der_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="paral_pta_der_N/A" name="paral_pta_der[]" value="N/A">
+                        <label for="paral_pta_der_N/A">N/A</label>
+                    </div>            
+                </div>
+                
+                <div class="form-group">
+                    <label for="paral_cent_der">PARAL CENT. DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 27">
+                        <input type="checkbox" id="paral_cent_der_bueno" name="paral_cent_der[]" value="BUENO">
+                        <label for="paral_cent_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="paral_cent_der_perforado" name="paral_cent_der[]" value="PERFORADO">
+                        <label for="paral_cent_der_perforado">PERFORADO</label>
+                
+                        <input type="checkbox" id="paral_cent_der_oxidado" name="paral_cent_der[]" value="OXIDADO">
+                        <label for="paral_cent_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="paral_cent_der_golpeado" name="paral_cent_der[]" value="GOLPEADO">
+                        <label for="paral_cent_der_golpeado">GOLPEADO</label>
+                
+                        <input type="checkbox" id="paral_cent_der_deformado" name="paral_cent_der[]" value="DEFORMADO">
+                        <label for="paral_cent_der_deformado">DEFORMADO</label>
+                
+                        <input type="checkbox" id="paral_cent_der_buena_reparacion" name="paral_cent_der[]" value="BUENA REPARACION">
+                        <label for="paral_cent_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="paral_cent_der_mala_reparacion" name="paral_cent_der[]" value="MALA REPARACION">
+                        <label for="paral_cent_der_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="paral_cent_der_N/A" name="paral_cent_der[]" value="N/A">
+                        <label for="paral_cent_der_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="larguero_capota_der">LARGUERO CAPOTA DER:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 28">
+                        <input type="checkbox" id="larguero_capota_der_bueno" name="larguero_capota_der[]" value="BUENO">
+                        <label for="larguero_capota_der_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="larguero_capota_der_perforado" name="larguero_capota_der[]" value="PERFORADO">
+                        <label for="larguero_capota_der_perforado">PERFORADO</label>
+                
+                        <input type="checkbox" id="larguero_capota_der_oxidado" name="larguero_capota_der[]" value="OXIDADO">
+                        <label for="larguero_capota_der_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="larguero_capota_der_golpeado" name="larguero_capota_der[]" value="GOLPEADO">
+                        <label for="larguero_capota_der_golpeado">GOLPEADO</label>
+                
+                        <input type="checkbox" id="larguero_capota_der_deformado" name="larguero_capota_der[]" value="DEFORMADO">
+                        <label for="larguero_capota_der_deformado">DEFORMADO</label>
+                
+                        <input type="checkbox" id="larguero_capota_der_buena_reparacion" name="larguero_capota_der[]" value="BUENA REPARACION">
+                        <label for="larguero_capota_der_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="larguero_capota_der_mala_reparacion" name="larguero_capota_der[]" value="MALA REPARACION">
+                        <label for="larguero_capota_der_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="larguero_capota_der_N/A" name="larguero_capota_der[]" value="N/A">
+                        <label for="larguero_capota_der_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="panel_tra">PANEL TRA:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 29">
+                        <input type="checkbox" id="panel_tra_bueno" name="panel_tra[]" value="BUENO">
+                        <label for="panel_tra_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="panel_tra_perforado" name="panel_tra[]" value="PERFORADO">
+                        <label for="panel_tra_perforado">PERFORADO</label>
+                
+                        <input type="checkbox" id="panel_tra_oxidado" name="panel_tra[]" value="OXIDADO">
+                        <label for="panel_tra_oxidado">OXIDADO</label>
+                
+                        <input type="checkbox" id="panel_tra_golpeado" name="panel_tra[]" value="GOLPEADO">
+                        <label for="panel_tra_golpeado">GOLPEADO</label>
+                
+                        <input type="checkbox" id="panel_tra_deformado" name="panel_tra[]" value="DEFORMADO">
+                        <label for="panel_tra_deformado">DEFORMADO</label>
+                
+                        <input type="checkbox" id="panel_tra_buena_reparacion" name="panel_tra[]" value="BUENA REPARACION">
+                        <label for="panel_tra_buena_reparacion">BUENA REPARACION</label>
+                
+                        <input type="checkbox" id="panel_tra_mala_reparacion" name="panel_tra[]" value="MALA REPARACION">
+                        <label for="panel_tra_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="panel_tra_N/A" name="panel_tra[]" value="N/A">
+                        <label for="panel_tra_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                <label for="g_polvo_met_tra_der">G/POLVO MET. TRA. DER:</label>
+                <div class="checkbox-group seccion" data-nombre="Sección 30">
+                    <input type="checkbox" id="g_polvo_met_tra_der_bueno" name="g_polvo_met_tra_der[]" value="BUENO">
+                    <label for="g_polvo_met_tra_der_bueno">BUENO</label>
+                    
+                    <input type="checkbox" id="g_polvo_met_tra_der_perforado" name="g_polvo_met_tra_der[]" value="PERFORADO">
+                    <label for="g_polvo_met_tra_der_perforado">PERFORADO</label>
+                    
+                    <input type="checkbox" id="g_polvo_met_tra_der_oxidado" name="g_polvo_met_tra_der[]" value="OXIDADO">
+                    <label for="g_polvo_met_tra_der_oxidado">OXIDADO</label>
+                    
+                    <input type="checkbox" id="g_polvo_met_tra_der_golpeado" name="g_polvo_met_tra_der[]" value="GOLPEADO">
+                    <label for="g_polvo_met_tra_der_golpeado">GOLPEADO</label>
+                    
+                    <input type="checkbox" id="g_polvo_met_tra_der_deformado" name="g_polvo_met_tra_der[]" value="DEFORMADO">
+                    <label for="g_polvo_met_tra_der_deformado">DEFORMADO</label>
+                    
+                    <input type="checkbox" id="g_polvo_met_tra_der_buena_reparacion" name="g_polvo_met_tra_der[]" value="BUENA REPARACION">
+                    <label for="g_polvo_met_tra_der_buena_reparacion">BUENA REPARACION</label>
+                    
+                    <input type="checkbox" id="g_polvo_met_tra_der_mala_reparacion" name="g_polvo_met_tra_der[]" value="MALA REPARACION">
+                    <label for="g_polvo_met_tra_der_mala_reparacion">MALA REPARACION</label>
+
+                    <input type="checkbox" id="g_polvo_met_tra_der_N/A" name="g_polvo_met_tra_der[]" value="N/A">
+                    <label for="g_polvo_met_tra_der_N/A">N/A</label>
+                </div>
+                </div>
+
+                <div class="form-group">
+                <label for="piso_carroceria">PISO CARROCERIA:</label>
+                <div class="checkbox-group seccion" data-nombre="Sección 31">
+                    <input type="checkbox" id="piso_carroceria_bueno" name="piso_carroceria[]" value="BUENO">
+                    <label for="piso_carroceria_bueno">BUENO</label>
+                    
+                    <input type="checkbox" id="piso_carroceria_perforado" name="piso_carroceria[]" value="PERFORADO">
+                    <label for="piso_carroceria_perforado">PERFORADO</label>
+                    
+                    <input type="checkbox" id="piso_carroceria_oxidado" name="piso_carroceria[]" value="OXIDADO">
+                    <label for="piso_carroceria_oxidado">OXIDADO</label>
+                    
+                    <input type="checkbox" id="piso_carroceria_golpeado" name="piso_carroceria[]" value="GOLPEADO">
+                    <label for="piso_carroceria_golpeado">GOLPEADO</label>
+                    
+                    <input type="checkbox" id="piso_carroceria_deformado" name="piso_carroceria[]" value="DEFORMADO">
+                    <label for="piso_carroceria_deformado">DEFORMADO</label>
+                    
+                    <input type="checkbox" id="piso_carroceria_buena_reparacion" name="piso_carroceria[]" value="BUENA REPARACION">
+                    <label for="piso_carroceria_buena_reparacion">BUENA REPARACION</label>
+                    
+                    <input type="checkbox" id="piso_carroceria_mala_reparacion" name="piso_carroceria[]" value="MALA REPARACION">
+                    <label for="piso_carroceria_mala_reparacion">MALA REPARACION</label>
+
+                    <input type="checkbox" id="piso_carroceria_N/A" name="piso_carroceria[]" value="N/A">
+                    <label for="piso_carroceria_N/A">N/A</label>
+                </div>
+                </div>
+
+                <div class="form-group">
+                <label for="refuerzo_piso_izq">REFUERZO PISO:</label>
+                <div class="checkbox-group seccion" data-nombre="Sección 32">
+                    <input type="checkbox" id="refuerzo_piso_izq_bueno" name="refuerzo_piso_izq[]" value="BUENO">
+                    <label for="refuerzo_piso_izq_bueno">BUENO</label>
+                    
+                    <input type="checkbox" id="refuerzo_piso_izq_perforado" name="refuerzo_piso_izq[]" value="PERFORADO">
+                    <label for="refuerzo_piso_izq_perforado">PERFORADO</label>
+                    
+                    <input type="checkbox" id="refuerzo_piso_izq_oxidado" name="refuerzo_piso_izq[]" value="OXIDADO">
+                    <label for="refuerzo_piso_izq_oxidado">OXIDADO</label>
+                    
+                    <input type="checkbox" id="refuerzo_piso_izq_golpeado" name="refuerzo_piso_izq[]" value="GOLPEADO">
+                    <label for="refuerzo_piso_izq_golpeado">GOLPEADO</label>
+                    
+                    <input type="checkbox" id="refuerzo_piso_izq_deformado" name="refuerzo_piso_izq[]" value="DEFORMADO">
+                    <label for="refuerzo_piso_izq_deformado">DEFORMADO</label>
+                    
+                    <input type="checkbox" id="refuerzo_piso_izq_buena_reparacion" name="refuerzo_piso_izq[]" value="BUENA REPARACION">
+                    <label for="refuerzo_piso_izq_buena_reparacion">BUENA REPARACION</label>
+                    
+                    <input type="checkbox" id="refuerzo_piso_izq_mala_reparacion" name="refuerzo_piso_izq[]" value="MALA REPARACION">
+                    <label for="refuerzo_piso_izq_mala_reparacion">MALA REPARACION</label>
+
+                    <input type="checkbox" id="refuerzo_piso_izq_N/A" name="refuerzo_piso_izq[]" value="N/A">
+                    <label for="refuerzo_piso_izq_N/A">N/A</label>
+                </div>
+                </div>
+            
+                <div class="form-group">
+                <label for="punta_tra_izq">PUNTA TRA. IZQ:</label>
+                <div class="checkbox-group seccion" data-nombre="Sección 33">
+                    <input type="checkbox" id="punta_tra_izq_bueno" name="punta_tra_izq[]" value="BUENA">
+                    <label for="punta_tra_izq_bueno">BUENA</label>
+                    
+                    <input type="checkbox" id="punta_tra_izq_perforado" name="punta_tra_izq[]" value="PERFORADA">
+                    <label for="punta_tra_izq_perforado">PERFORADA</label>
+                    
+                    <input type="checkbox" id="punta_tra_izq_oxidado" name="punta_tra_izq[]" value="OXIDADA">
+                    <label for="punta_tra_izq_oxidado">OXIDADA</label>
+                    
+                    <input type="checkbox" id="punta_tra_izq_golpeado" name="punta_tra_izq[]" value="GOLPEADA">
+                    <label for="punta_tra_izq_golpeado">GOLPEADA</label>
+                    
+                    <input type="checkbox" id="punta_tra_izq_deformado" name="punta_tra_izq[]" value="DEFORMADA">
+                    <label for="punta_tra_izq_deformado">DEFORMADA</label>
+                    
+                    <input type="checkbox" id="punta_tra_izq_buena_reparacion" name="punta_tra_izq[]" value="BUENA REPARACION">
+                    <label for="punta_tra_izq_buena_reparacion">BUENA REPARACION</label>
+                    
+                    <input type="checkbox" id="punta_tra_izq_mala_reparacion" name="punta_tra_izq[]" value="MALA REPARACION">
+                    <label for="punta_tra_izq_mala_reparacion">MALA REPARACION</label>
+
+                    <input type="checkbox" id="punta_tra_izq_N/A" name="punta_tra_izq[]" value="N/A">
+                    <label for="punta_tra_izq_N/A">N/A</label>
+                </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="punta_chasis_del_izq">PUNTA CHASIS DEL. IZQ:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 34">
+                        <input type="checkbox" id="punta_chasis_del_izq_bueno" name="punta_chasis_del_izq[]" value="BUENA">
+                        <label for="punta_chasis_del_izq_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_izq_perforado" name="punta_chasis_del_izq[]" value="PERFORADA">
+                        <label for="punta_chasis_del_izq_perforado">PERFORADA</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_izq_oxidado" name="punta_chasis_del_izq[]" value="OXIDADA">
+                        <label for="punta_chasis_del_izq_oxidado">OXIDADA</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_izq_golpeado" name="punta_chasis_del_izq[]" value="GOLPEADA">
+                        <label for="punta_chasis_del_izq_golpeado">GOLPEADA</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_izq_deformado" name="punta_chasis_del_izq[]" value="DEFORMADA">
+                        <label for="punta_chasis_del_izq_deformado">DEFORMADA</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_izq_buena_reparacion" name="punta_chasis_del_izq[]" value="BUENA REPARACION">
+                        <label for="punta_chasis_del_izq_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="punta_chasis_del_izq_mala_reparacion" name="punta_chasis_del_izq[]" value="MALA REPARACION">
+                        <label for="punta_chasis_del_izq_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="punta_chasis_del_izq_N/A" name="punta_chasis_del_izq[]" value="N/A">
+                        <label for="punta_chasis_del_izq_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="traviesa_inferior">TRAVIESA INFERIOR:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 35">
+                        <input type="checkbox" id="traviesa_inferior_bueno" name="traviesa_inferior[]" value="BUENA">
+                        <label for="traviesa_inferior_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="traviesa_inferior_perforado" name="traviesa_inferior[]" value="PERFORADA">
+                        <label for="traviesa_inferior_perforado">PERFORADA</label>
+                        
+                        <input type="checkbox" id="traviesa_inferior_oxidado" name="traviesa_inferior[]" value="OXIDADA">
+                        <label for="traviesa_inferior_oxidado">OXIDADA</label>
+                        
+                        <input type="checkbox" id="traviesa_inferior_golpeado" name="traviesa_inferior[]" value="GOLPEADA">
+                        <label for="traviesa_inferior_golpeado">GOLPEADA</label>
+                        
+                        <input type="checkbox" id="traviesa_inferior_deformado" name="traviesa_inferior[]" value="DEFORMADA">
+                        <label for="traviesa_inferior_deformado">DEFORMADA</label>
+                        
+                        <input type="checkbox" id="traviesa_inferior_buena_reparacion" name="traviesa_inferior[]" value="BUENA REPARACION">
+                        <label for="traviesa_inferior_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="traviesa_inferior_mala_reparacion" name="traviesa_inferior[]" value="MALA REPARACION">
+                        <label for="traviesa_inferior_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="traviesa_inferior_N/A" name="traviesa_inferior[]" value="N/A">
+                        <label for="traviesa_inferior_N/A">N/A</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                        <label for="g_polvo_met_del_izq">G/POLVO MET. DEL. IZQ:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 36">
+                            <input type="checkbox" id="g_polvo_met_del_izq_bueno" name="polvo_met_del_izq[]" value="BUENO">
+                            <label for="g_polvo_met_del_izq_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_del_izq_perforado" name="polvo_met_del_izq[]" value="PERFORADO">
+                            <label for="g_polvo_met_del_izq_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_del_izq_oxidado" name="polvo_met_del_izq[]" value="OXIDADO">
+                            <label for="g_polvo_met_del_izq_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_del_izq_golpeado" name="polvo_met_del_izq[]" value="GOLPEADO">
+                            <label for="g_polvo_met_del_izq_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_del_izq_deformado" name="polvo_met_del_izq[]" value="DEFORMADO">
+                            <label for="g_polvo_met_del_izq_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_del_izq_buena_reparacion" name="polvo_met_del_izq[]" value="BUENA REPARACION">
+                            <label for="g_polvo_met_del_izq_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_del_izq_mala_reparacion" name="polvo_met_del_izq[]" value="MALA REPARACION">
+                            <label for="g_polvo_met_del_izq_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="polvo_met_del_izq_N/A" name="polvo_met_del_izq[]" value="N/A">
+                            <label for="polvo_met_del_izq_N/A">N/A</label>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                        <label for="paral_pano_izq">PARAL PANO. IZQ:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 37">
+                            <input type="checkbox" id="paral_pano_izq_bueno" name="paral_pano_izq[]" value="BUENO">
+                            <label for="paral_pano_izq_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="paral_pano_izq_perforado" name="paral_pano_izq[]" value="PERFORADO">
+                            <label for="paral_pano_izq_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="paral_pano_izq_oxidado" name="paral_pano_izq[]" value="OXIDADO">
+                            <label for="paral_pano_izq_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="paral_pano_izq_golpeado" name="paral_pano_izq[]" value="GOLPEADO">
+                            <label for="paral_pano_izq_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="paral_pano_izq_deformado" name="paral_pano_izq[]" value="DEFORMADO">
+                            <label for="paral_pano_izq_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="paral_pano_izq_buena_reparacion" name="paral_pano_izq[]" value="BUENA REPARACION">
+                            <label for="paral_pano_izq_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="paral_pano_izq_mala_reparacion" name="paral_pano_izq[]" value="MALA REPARACION">
+                            <label for="paral_pano_izq_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="paral_pano_izq_N/A" name="paral_pano_izq[]" value="N/A">
+                            <label for="paral_pano_izq_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="paral_pta_izq">PARAL PTA. IZQ:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 38">
+                            <input type="checkbox" id="paral_pta_izq_bueno" name="paral_pta_izq[]" value="BUENO">
+                            <label for="paral_pta_izq_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="paral_pta_izq_perforado" name="paral_pta_izq[]" value="PERFORADO">
+                            <label for="paral_pta_izq_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="paral_pta_izq_oxidado" name="paral_pta_izq[]" value="OXIDADO">
+                            <label for="paral_pta_izq_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="paral_pta_izq_golpeado" name="paral_pta_izq[]" value="GOLPEADO">
+                            <label for="paral_pta_izq_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="paral_pta_izq_deformado" name="paral_pta_izq[]" value="DEFORMADO">
+                            <label for="paral_pta_izq_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="paral_pta_izq_buena_reparacion" name="paral_pta_izq[]" value="BUENA REPARACION">
+                            <label for="paral_pta_izq_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="paral_pta_izq_mala_reparacion" name="paral_pta_izq[]" value="MALA REPARACION">
+                            <label for="paral_pta_izq_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="paral_pta_izq_N/A" name="paral_pta_izq[]" value="N/A">
+                            <label for="paral_pta_izq_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                    <div class="form-group">
+                        <label for="paral_cent_izq">PARAL CENT. IZQ:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 39">
+                            <input type="checkbox" id="paral_cent_izq_bueno" name="paral_cent_izq[]" value="BUENO">
+                            <label for="paral_cent_izq_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="paral_cent_izq_perforado" name="paral_cent_izq[]" value="PERFORADO">
+                            <label for="paral_cent_izq_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="paral_cent_izq_oxidado" name="paral_cent_izq[]" value="OXIDADO">
+                            <label for="paral_cent_izq_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="paral_cent_izq_golpeado" name="paral_cent_izq[]" value="GOLPEADO">
+                            <label for="paral_cent_izq_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="paral_cent_izq_deformado" name="paral_cent_izq[]" value="DEFORMADO">
+                            <label for="paral_cent_izq_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="paral_cent_izq_buena_reparacion" name="paral_cent_izq[]" value="BUENA REPARACION">
+                            <label for="paral_cent_izq_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="paral_cent_izq_mala_reparacion" name="paral_cent_izq[]" value="MALA REPARACION">
+                            <label for="paral_cent_izq_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="paral_cent_izq_N/A" name="paral_cent_izq[]" value="N/A">
+                            <label for="paral_cent_izq_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="larguero_capota_izq">LARGUERO CAPOTA IZQ:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 40">
+                            <input type="checkbox" id="larguero_capota_izq_bueno" name="larguero_capota_izq[]" value="BUENO">
+                            <label for="larguero_capota_izq_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="larguero_capota_izq_perforado" name="larguero_capota_izq[]" value="PERFORADO">
+                            <label for="larguero_capota_izq_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="larguero_capota_izq_oxidado" name="larguero_capota_izq[]" value="OXIDADO">
+                            <label for="larguero_capota_izq_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="larguero_capota_izq_golpeado" name="larguero_capota_izq[]" value="GOLPEADO">
+                            <label for="larguero_capota_izq_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="larguero_capota_izq_deformado" name="larguero_capota_izq[]" value="DEFORMADO">
+                            <label for="larguero_capota_izq_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="larguero_capota_izq_buena_reparacion" name="larguero_capota_izq[]" value="BUENA REPARACION">
+                            <label for="larguero_capota_izq_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="larguero_capota_izq_mala_reparacion" name="larguero_capota_izq[]" value="MALA REPARACION">
+                            <label for="larguero_capota_izq_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="larguero_capota_izq_N/A" name="larguero_capota_izq[]" value="N/A">
+                            <label for="larguero_capota_izq_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="piso_baul_platon">PISO BAUL/PLATON:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 41">
+                            <input type="checkbox" id="piso_baul_platon_bueno" name="piso_baul_platon[]" value="BUENO">
+                            <label for="piso_baul_platon_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="piso_baul_platon_perforado" name="piso_baul_platon[]" value="PERFORADO">
+                            <label for="piso_baul_platon_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="piso_baul_platon_oxidado" name="piso_baul_platon[]" value="OXIDADO">
+                            <label for="piso_baul_platon_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="piso_baul_platon_golpeado" name="piso_baul_platon[]" value="GOLPEADO">
+                            <label for="piso_baul_platon_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="piso_baul_platon_deformado" name="piso_baul_platon[]" value="DEFORMADO">
+                            <label for="piso_baul_platon_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="piso_baul_platon_buena_reparacion" name="piso_baul_platon[]" value="BUENA REPARACION">
+                            <label for="piso_baul_platon_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="piso_baul_platon_mala_reparacion" name="piso_baul_platon[]" value="MALA REPARACION">
+                            <label for="piso_baul_platon_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="piso_baul_platon_N/A" name="piso_baul_platon[]" value="N/A">
+                            <label for="piso_baul_platon_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="g_polvo_met_tra_izq">G.POLVO MET. TRA. IZQ:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 42">
+                            <input type="checkbox" id="g_polvo_met_tra_izq_bueno" name="g_polvo_met_tra_izq[]" value="BUENO">
+                            <label for="g_polvo_met_tra_izq_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_tra_izq_perforado" name="g_polvo_met_tra_izq[]" value="PERFORADO">
+                            <label for="g_polvo_met_tra_izq_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_tra_izq_oxidado" name="g_polvo_met_tra_izq[]" value="OXIDADO">
+                            <label for="g_polvo_met_tra_izq_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_tra_izq_golpeado" name="g_polvo_met_tra_izq[]" value="GOLPEADO">
+                            <label for="g_polvo_met_tra_izq_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_tra_izq_deformado" name="g_polvo_met_tra_izq[]" value="DEFORMADO">
+                            <label for="g_polvo_met_tra_izq_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_tra_izq_buena_reparacion" name="g_polvo_met_tra_izq[]" value="BUENA REPARACION">
+                            <label for="g_polvo_met_tra_izq_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="g_polvo_met_tra_izq_mala_reparacion" name="g_polvo_met_tra_izq[]" value="MALA REPARACION">
+                            <label for="g_polvo_met_tra_izq_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="g_polvo_met_tra_izq_N/A" name="g_polvo_met_tra_izq[]" value="N/A">
+                            <label for="g_polvo_met_tra_izq_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="refuerzo_piso_der">REFUERZO PISO DER:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 43">
+                            <input type="checkbox" id="refuerzo_piso_der_bueno" name="refuerzo_piso_der[]" value="BUENO">
+                            <label for="refuerzo_piso_der_bueno">BUENO</label>
+                            
+                            <input type="checkbox" id="refuerzo_piso_der_perforado" name="refuerzo_piso_der[]" value="PERFORADO">
+                            <label for="refuerzo_piso_der_perforado">PERFORADO</label>
+                            
+                            <input type="checkbox" id="refuerzo_piso_der_oxidado" name="refuerzo_piso_der[]" value="OXIDADO">
+                            <label for="refuerzo_piso_der_oxidado">OXIDADO</label>
+                            
+                            <input type="checkbox" id="refuerzo_piso_der_golpeado" name="refuerzo_piso_der[]" value="GOLPEADO">
+                            <label for="refuerzo_piso_der_golpeado">GOLPEADO</label>
+                            
+                            <input type="checkbox" id="refuerzo_piso_der_deformado" name="refuerzo_piso_der[]" value="DEFORMADO">
+                            <label for="refuerzo_piso_der_deformado">DEFORMADO</label>
+                            
+                            <input type="checkbox" id="refuerzo_piso_der_buena_reparacion" name="refuerzo_piso_der[]" value="BUENA REPARACION">
+                            <label for="refuerzo_piso_der_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="refuerzo_piso_der_mala_reparacion" name="refuerzo_piso_der[]" value="MALA REPARACION">
+                            <label for="refuerzo_piso_der_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="refuerzo_piso_der_N/A" name="refuerzo_piso_der[]" value="N/A">
+                            <label for="refuerzo_piso_der_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="punta_tra_der">PUNTA TRA. DER:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 44">
+                            <input type="checkbox" id="punta_tra_der_bueno" name="punta_tra_der[]" value="BUENA">
+                            <label for="punta_tra_der_bueno">BUENA</label>
+                            
+                            <input type="checkbox" id="punta_tra_der_perforado" name="punta_tra_der[]" value="PERFORADA">
+                            <label for="punta_tra_der_perforado">PERFORADA</label>
+                            
+                            <input type="checkbox" id="punta_tra_der_oxidado" name="punta_tra_der[]" value="OXIDADA">
+                            <label for="punta_tra_der_oxidado">OXIDADA</label>
+                            
+                            <input type="checkbox" id="punta_tra_der_golpeado" name="punta_tra_der[]" value="GOLPEADA">
+                            <label for="punta_tra_der_golpeado">GOLPEADA</label>
+                            
+                            <input type="checkbox" id="punta_tra_der_deformado" name="punta_tra_der[]" value="DEFORMADA">
+                            <label for="punta_tra_der_deformado">DEFORMADA</label>
+                            
+                            <input type="checkbox" id="punta_tra_der_buena_reparacion" name="punta_tra_der[]" value="BUENA REPARACION">
+                            <label for="punta_tra_der_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="punta_tra_der_mala_reparacion" name="punta_tra_der[]" value="MALA REPARACION">
+                            <label for="punta_tra_der_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="punta_tra_der_N/A" name="punta_tra_der[]" value="N/A">
+                            <label for="punta_tra_der_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="cuna_motor">CUNA MOTOR:</label>
+                        <div class="checkbox-group seccion" data-nombre="Sección 45">
+                            <input type="checkbox" id="cuna_motor_bueno" name="cuna_motor[]" value="BUENA">
+                            <label for="cuna_motor_bueno">BUENA</label>
+                            
+                            <input type="checkbox" id="cuna_motor_perforado" name="cuna_motor[]" value="PERFORADA">
+                            <label for="cuna_motor_perforado">PERFORADA</label>
+                            
+                            <input type="checkbox" id="cuna_motor_oxidado" name="cuna_motor[]" value="OXIDADA">
+                            <label for="cuna_motor_oxidado">OXIDADA</label>
+                            
+                            <input type="checkbox" id="cuna_motor_golpeado" name="cuna_motor[]" value="GOLPEADA">
+                            <label for="cuna_motor_golpeado">GOLPEADA</label>
+                            
+                            <input type="checkbox" id="cuna_motor_deformado" name="cuna_motor[]" value="DEFORMADA">
+                            <label for="cuna_motor_deformado">DEFORMADA</label>
+                            
+                            <input type="checkbox" id="cuna_motor_buena_reparacion" name="cuna_motor[]" value="BUENA REPARACION">
+                            <label for="cuna_motor_buena_reparacion">BUENA REPARACION</label>
+                            
+                            <input type="checkbox" id="cuna_motor_mala_reparacion" name="cuna_motor[]" value="MALA REPARACION">
+                            <label for="cuna_motor_mala_reparacion">MALA REPARACION</label>
+
+                            <input type="checkbox" id="cuna_motor_N/A" name="cuna_motor[]" value="N/A">
+                            <label for="cuna_motor_N/A">N/A</label>
+                        </div>
+                </div>
+                    
+                <div class="form-group">
+                        <label for="rechazado_datos">RECHAZADO:</label>
+                        <select id="rechazado_datos" name="rechazado_datos_chasis" required>
+                            <option value="" selected disabled>Selecciona una opción</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                </div>
+                    
+
+            </div>
+
+            <div class="section">
+                <div class="section-title">INTERIOR CABINA</div>
+                <div class="form-group">
+                    <label for="carteras">CARTERAS:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 59">
+                        <input type="checkbox" id="carteras_bueno" name="carteras[]" value="BUENA">
+                        <label for="carteras_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="carteras_deteriorado_uso" name="carteras[]" value="DETERIORADA POR USO">
+                        <label for="carteras_deteriorado_uso">DETERIORADA POR USO</label>
+                        
+                        <input type="checkbox" id="carteras_cortado" name="carteras[]" value="CORTADA">
+                        <label for="carteras_cortado">CORTADA</label>
+                        
+                        <input type="checkbox" id="carteras_buena_reparacion" name="carteras[]" value="BUENA REPARACION">
+                        <label for="carteras_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="carteras_mala_reparacion" name="carteras[]" value="MALA REPARACION">
+                        <label for="carteras_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="carteras_N/A" name="carteras[]" value="N/A">
+                        <label for="carteras_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="consola">CONSOLA:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 60">
+                        <input type="checkbox" id="consola_bueno" name="consola[]" value="BUENO">
+                        <label for="consola_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="consola_deteriorado_uso" name="consola[]" value="DETERIORADA POR USO">
+                        <label for="consola_deteriorado_uso">DETERIORADA POR USO</label>
+                        
+                        <input type="checkbox" id="consola_cortado" name="consola[]" value="RAYADA">
+                        <label for="consola_cortado">RAYADA</label>
+                        
+                        <input type="checkbox" id="consola_buena_reparacion" name="consola[]" value="BUENA REPARACION">
+                        <label for="consola_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="consola_mala_reparacion" name="consola[]" value="MALA REPARACION">
+                        <label for="consola_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="consola_N/A" name="consola[]" value="N/A">
+                        <label for="consola_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="funcionamiento_sillas">FUNCIONAMIENTO SILLAS:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 61">
+                        <input type="checkbox" id="funcionamiento_sillas_f" name="funcionamiento_sillas[]" value="FUNCIONA">
+                        <label for="funcionamiento_sillas_f">FUNCIONA</label>
+                        
+                        <input type="checkbox" id="funcionamiento_sillas_n" name="funcionamiento_sillas[]" value="NO FUNCIONA">
+                        <label for="funcionamiento_sillas_n">NO FUNCIONA</label>
+
+                        <input type="checkbox" id="funcionamiento_sillas_N/A" name="funcionamiento_sillas[]" value="N/A">
+                        <label for="funcionamiento_sillas_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="millare">MILLARE:</label>
+                    <div class="checkbox-group seccion" data-nombre="Sección 62">
+                        <input type="checkbox" id="millare_bueno" name="millare[]" value="BUENO">
+                        <label for="millare_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="millare_deteriorado_uso" name="millare[]" value="DETERIORADO POR USO">
+                        <label for="millare_deteriorado_uso">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="millare_cortado" name="millare[]" value="CORTADO">
+                        <label for="millare_cortado">CORTADO</label>
+
+                        <input type="checkbox" id="millare_decolorado" name="millare[]" value="DECOLORADO">
+                        <label for="millare_decolorado">DECOLORADO</label>
+                        
+                        <input type="checkbox" id="millare_buena_reparacion" name="millare[]" value="BUENA REPARACION">
+                        <label for="millare_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="millare_mala_reparacion" name="millare[]" value="MALA REPARACION">
+                        <label for="millare_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="millare_N/A" name="millare[]" value="N/A">
+                        <label for="millare_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="persiana">PERSIANA:</label> 
+                    <div class="checkbox-group seccion" data-nombre="Sección 50">
+                        <input type="checkbox" id="persiana_bueno" name="persiana[]" value="BUENA">
+                        <label for="persiana_bueno">BUENA</label>
+
+                        <input type="checkbox" id="persiana_rayada" name="persiana[]" value="RAYADA">
+                        <label for="persiana_rayada">RAYADA</label>
+
+                        <input type="checkbox" id="persiana_faltante" name="persiana[]" value="FALTANTE">
+                        <label for="persiana_faltante">FALTANTE</label>
+                        
+                        <input type="checkbox" id="persiana_buena_reparacion" name="persiana[]" value="BUENA REPARACION">
+                        <label for="persiana_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="persiana_mala_reparacion" name="persiana[]" value="MALA REPARACION">
+                        <label for="persiana_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="persiana_N/A" name="persiana[]" value="N/A">
+                        <label for="persiana_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="tapiceria_sillas">TAPICERIA SILLAS:</label> 
+                    <div class="checkbox-group seccion" data-nombre="Sección 51">
+                        <input type="checkbox" id="tapiceria_sillas_bueno" name="tapiceria_sillas[]" value="BUENA">
+                        <label for="tapiceria_sillas_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="tapiceria_sillas_deteriorado_uso" name="tapiceria_sillas[]" value="DETERIORADA POR USO">
+                        <label for="tapiceria_sillas_deteriorado_uso">DETERIORADA POR USO</label>
+                        
+                        <input type="checkbox" id="tapiceria_sillas_cortado" name="tapiceria_sillas[]" value="CORTADA">
+                        <label for="tapiceria_sillas_cortado">CORTADA</label>
+
+                        <input type="checkbox" id="tapiceria_sillas_quemada" name="tapiceria_sillas[]" value="QUEMADA">
+                        <label for="tapiceria_sillas_quemada">QUEMADA</label>
+                        
+                        <input type="checkbox" id="tapiceria_sillas_buena_reparacion" name="tapiceria_sillas[]" value="BUENA REPARACION">
+                        <label for="tapiceria_sillas_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="tapiceria_sillas_mala_reparacion" name="tapiceria_sillas[]" value="MALA REPARACION">
+                        <label for="tapiceria_sillas_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="tapiceria_sillas_N/A" name="tapiceria_sillas[]" value="N/A">
+                        <label for="tapiceria_sillas_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="timon_bueno">TIMON:</label> 
+                    <div class="checkbox-group seccion" data-nombre="Sección 52">
+                        <input type="checkbox" id="timon_bueno" name="timon[]" value="BUENO">
+                        <label for="timon_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="timon_deteriorado_uso" name="timon[]" value="DETERIORADO POR USO">
+                        <label for="timon_deteriorado_uso">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="timon_cortado" name="timon[]" value="CORTADO">
+                        <label for="timon_cortado">CORTADO</label>
+                        
+                        <input type="checkbox" id="timon_buena_reparacion" name="timon[]" value="BUENA REPARACION">
+                        <label for="timon_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="timon_mala_reparacion" name="timon[]" value="MALA REPARACION">
+                        <label for="timon_mala_reparacion">MALA REPARACION</label>
+                
+                        <input type="checkbox" id="timon_no_aplica" name="timon[]" value="N/A">
+                        <label for="timon_no_aplica">N/A</label>
+                    </div>                    
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="cinturones_bueno">CINTURONES:</label>  
+                    <div class="checkbox-group seccion" data-nombre="Sección 53">
+                        <input type="checkbox" id="cinturones_bueno" name="cinturones[]" value="BUENO">
+                        <label for="cinturones_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="cinturones_deteriorado_uso" name="cinturones[]" value="DETERIORADO POR USO">
+                        <label for="cinturones_deteriorado_uso">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="cinturones_cortado" name="cinturones[]" value="CORTADO">
+                        <label for="cinturones_cortado">CORTADO</label>
+
+                        <input type="checkbox" id="cinturones_faltante" name="cinturones[]" value="FALTANTE">
+                        <label for="cinturones_faltante">FALTANTE</label>
+                        
+                        <input type="checkbox" id="cinturones_buena_reparacion" name="cinturones[]" value="BUENA REPARACION">
+                        <label for="cinturones_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="cinturones_mala_reparacion" name="cinturones[]" value="MALA REPARACION">
+                        <label for="cinturones_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="cinturones_N/A" name="cinturones[]" value="N/A">
+                        <label for="cinturones_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="espejo_interior_bueno">ESPEJO INTERIOR:</label>   
+                    <div class="checkbox-group seccion" data-nombre="Sección 54">
+                        <input type="checkbox" id="espejo_interior_bueno" name="espejo_interior[]" value="BUENO">
+                        <label for="espejo_interior_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="espejo_interior_deteriorado_uso" name="espejo_interior[]" value="DETERIORADO POR USO">
+                        <label for="espejo_interior_deteriorado_uso">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="espejo_interior_rayado" name="espejo_interior[]" value="RAYADO">
+                        <label for="espejo_interior_rayado">RAYADO</label>
+
+                        <input type="checkbox" id="espejo_interior_faltante" name="espejo_interior[]" value="FALTANTE">
+                        <label for="espejo_interior_faltante">FALTANTE</label>
+                        
+                        <input type="checkbox" id="espejo_interior_buena_reparacion" name="espejo_interior[]" value="BUENA REPARACION">
+                        <label for="espejo_interior_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="espejo_interior_mala_reparacion" name="espejo_interior[]" value="MALA REPARACION">
+                        <label for="espejo_interior_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="espejo_interior_N/A" name="espejo_interior[]" value="N/A">
+                        <label for="espejo_interior_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="guantera_bueno">GUANTERA:</label>   
+                    <div class="checkbox-group seccion" data-nombre="Sección 55">
+                        <input type="checkbox" id="guantera_bueno" name="guantera[]" value="BUENA">
+                        <label for="guantera_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="guantera_deteriorado_uso" name="guantera[]" value="DETERIORADA POR USO">
+                        <label for="guantera_deteriorado_uso">DETERIORADA POR USO</label>
+                        
+                        <input type="checkbox" id="guantera_rayada" name="guantera[]" value="RAYADA">
+                        <label for="guantera_rayada">RAYADA</label>
+
+                        <input type="checkbox" id="guantera_faltante" name="guantera[]" value="FALTANTE">
+                        <label for="guantera_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="guantera_rota" name="guantera[]" value="ROTA">
+                        <label for="guantera_rota">ROTA</label>
+                        
+                        <input type="checkbox" id="guantera_buena_reparacion" name="guantera[]" value="BUENA REPARACION">
+                        <label for="guantera_buena_reparacion">BUENA REPARACION</label>
+                        
+                        <input type="checkbox" id="guantera_mala_reparacion" name="guantera[]" value="MALA REPARACION">
+                        <label for="guantera_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="guantera_N/A" name="guantera[]" value="N/A">
+                        <label for="guantera_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="parasol_bueno">PARASOLES:</label>   
+                    <div class="checkbox-group seccion" data-nombre="Sección 56">
+                        <input type="checkbox" id="parasol_bueno" name="parasol[]" value="BUENO">
+                        <label for="parasol_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="parasol_deteriorado_uso" name="parasol[]" value="DETERIORADO POR USO">
+                        <label for="parasol_deteriorado_uso">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="parasol_rayado" name="parasol[]" value="RAYADO">
+                        <label for="parasol_rayado">RAYADO</label>
+
+                        <input type="checkbox" id="parasol_faltante" name="parasol[]" value="FALTANTE">
+                        <label for="parasol_faltante">FALTANTE</label>
+                        
+                        <input type="checkbox" id="parasol_mala_reparacion" name="parasol[]" value="MALA REPARACION">
+                        <label for="parasol_mala_reparacion">MALA REPARACION</label>
+
+                        <input type="checkbox" id="parasol_N/A" name="parasol[]" value="N/A">
+                        <label for="parasol_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="tapiceria_piso_bueno">TAPICERIA PISO:</label>    
+                    <div class="checkbox-group seccion" data-nombre="Sección 57">
+                        <input type="checkbox" id="tapiceria_piso_bueno" name="tapiceria_piso[]" value="BUENA">
+                        <label for="tapiceria_piso_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="tapiceria_piso_deteriorado_uso" name="tapiceria_piso[]" value="DETERIORADA POR USO">
+                        <label for="tapiceria_piso_deteriorado_uso">DETERIORADA POR USO</label>
+                        
+                        <input type="checkbox" id="tapiceria_sucia/manchada" name="tapiceria_piso[]" value="SUCIA/MANCHADA">
+                        <label for="tapiceria_sucia/manchada">SUCIA/MANCHADA</label>
+                        
+                        <input type="checkbox" id="tapiceria_piso_mojada" name="tapiceria_piso[]" value="MOJADA">
+                        <label for="tapiceria_piso_mojada">MOJADA</label>
+
+                        <input type="checkbox" id="tapiceria_piso_N/A" name="tapiceria_piso[]" value="N/A">
+                        <label for="tapiceria_piso_N/A">N/A</label>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="tapiceria_techo_bueno">TAPIZADO TECHO:</label>     
+                    <div class="checkbox-group seccion" data-nombre="Sección 58">
+                        <input type="checkbox" id="tapiceria_techo_bueno" name="tapiceria_techo[]" value="BUENO">
+                        <label for="tapiceria_techo_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="tapiceria_techo_deteriorado_uso" name="tapiceria_techo[]" value="DETERIORADO POR USO">
+                        <label for="tapiceria_techo_deteriorado_uso">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="tapiceria_techo_cortado" name="tapiceria_techo[]" value="CORTADO">
+                        <label for="tapiceria_techo_cortado">CORTADO</label>
+                        
+                        <input type="checkbox" id="tapiceria_techo_sucio/manchado" name="tapiceria_techo[]" value="SUCIO/MANCHADO">
+                        <label for="tapiceria_techo_sucio/manchado">SUCIO/MANCHADO</label>
+                        
+                        <input type="checkbox" id="tapiceria_techo_quemado" name="tapiceria_techo[]" value="QUEMADO">
+                        <label for="tapiceria_techo_quemado">QUEMADO</label>
+
+                        <input type="checkbox" id="tapiceria_techo_N/A" name="tapiceria_techo[]" value="N/A">
+                        <label for="tapiceria_techo_N/A">N/A</label>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">SISTEMA ELECTRICO</div>
+                <div class="form-group">
+                    <label for="seleccion1">A/AC:</label>
+                    <select id="seleccion1" name="a_ac" onchange="mostrarNota('notaContainer1', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ENFRIA">ENFRIA</option>
+                        <option value="NOENFRIA">NO ENFRIA</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer1" style="display: none;">
+                    <label for="nota1">Nota:</label>
+                    <textarea id="nota1" name="nota_a_ac" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion2">CALEFACCION:</label>
+                    <select id="seleccion2" name="calefaccion" onchange="mostrarNota('notaContainer2', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="CALIENTA">CALIENTA</option>
+                        <option value="NOCALIENTA">NO CALIENTA</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer2" style="display: none;">
+                    <label for="nota2">Nota:</label>
+                    <textarea id="nota2" name="nota_calefaccion" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion3">ENCENDIDO:</label>
+                    <select id="seleccion3" name="encendido" onchange="mostrarNota('notaContainer3', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="MALO">MALO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer3" style="display: none;">
+                    <label for="nota3">Nota:</label>
+                    <textarea id="nota3" name="nota_encendido" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion4">PLUMILLAS:</label>
+                    <select id="seleccion4" name="plumillas" onchange="mostrarNota('notaContainer4', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="DETERIORADAS POR USO">DETERIORADAS POR USO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer4" style="display: none;">
+                    <label for="nota4">Nota:</label>
+                    <textarea id="nota4" name="nota_plumillas" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="seleccion5">SILLAS ELECT:</label>
+                    <select id="seleccion5" name="sillas_elect" onchange="mostrarNota('notaContainer5', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer5" style="display: none;">
+                    <label for="nota5">Nota:</label>
+                    <textarea id="nota5" name="nota_sillas_elect" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion6">BQUEO CENTRAL:</label>
+                    <select id="seleccion6" name="bqueo_central" onchange="mostrarNota('notaContainer6', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="MALO">MALO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer6" style="display: none;">
+                    <label for="nota6">Nota:</label>
+                    <textarea id="nota6" name="nota_bqueo_central" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion7">SIST VIDRIOS ELECT:</label>
+                    <select id="seleccion7" name="e_vidrios_elect" onchange="mostrarNota('notaContainer7', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENOS">BUENOS</option>
+                        <option value="MALOS">MALOS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer7" style="display: none;">
+                    <label for="nota7">Nota:</label>
+                    <textarea id="nota7" name="nota_e_vidrios_elect" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion8">ESPEJOS ELECT:</label>
+                    <select id="seleccion8" name="espejos_elect" onchange="mostrarNota('notaContainer8', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="MALO">MALO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer8" style="display: none;">
+                    <label for="nota8">Nota:</label>
+                    <textarea id="nota8" name="nota_espejos_elect" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion9">RADIO:</label>
+                    <select id="seleccion9" name="radio" onchange="mostrarNota('notaContainer9', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="MALO">MALO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer9" style="display: none;">
+                    <label for="nota9">Nota:</label>
+                    <textarea id="nota9" name="nota_radio" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion10">SUNROOF:</label>
+                    <select id="seleccion10" name="sunroof" onchange="mostrarNota('notaContainer10', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="MALO">MALO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer10" style="display: none;">
+                    <label for="nota10">Nota:</label>
+                    <textarea id="nota10" name="nota_sunroof" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rechazado_datos_sis">RECHAZADO:</label>
+                    <select id="rechazado_datos_sis" name="rechazado_datos_sis" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+            </div> 
+            
+            <div class="section">
+                <div class="section-title">LUCES</div>
+                <div class="form-group">
+                    <label for="seleccion11">ALTAS:</label>
+                    <select id="seleccion11" name="altas" onchange="mostrarNota('notaContainer11', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer11" style="display: none;">
+                    <label for="nota11">Nota:</label>
+                    <textarea id="nota11" name="nota_altas" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion12">COCUYOS:</label>
+                    <select id="seleccion12" name="cocuyos" onchange="mostrarNota('notaContainer12', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer12" style="display: none;">
+                    <label for="nota12">Nota:</label>
+                    <textarea id="nota12" name="nota_cocuyos" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion13">REVERSA:</label>
+                    <select id="seleccion13" name="reversa" onchange="mostrarNota('notaContainer13', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer13" style="display: none;">
+                    <label for="nota13">Nota:</label>
+                    <textarea id="nota13" name="nota_reversa" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion14">DIRECCIONALES:</label>
+                    <select id="seleccion14" name="direccionales" onchange="mostrarNota('notaContainer14', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer14" style="display: none;">
+                    <label for="nota14">Nota:</label>
+                    <textarea id="nota14" name="nota_direccionales" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion15">LUCES DE TECHO:</label>
+                    <select id="seleccion15" name="luz_techo" onchange="mostrarNota('notaContainer15', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer15" style="display: none;">
+                    <label for="nota15">Nota:</label>
+                    <textarea id="nota15" name="nota_luz_techo" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion16">TERCER STOP:</label>
+                    <select id="seleccion16" name="tercer_stop_luz" onchange="mostrarNota('notaContainer16', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENA">BUENA</option>
+                        <option value="MALA">MALA</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group" id="notaContainer16" style="display: none;">
+                    <label for="nota16">Nota:</label>
+                    <textarea id="nota16" name="nota_tercer_stop_luz" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion17">LUCES LATERALES:</label>
+                    <select id="seleccion17" name="luces_laterales" onchange="mostrarNota('notaContainer17', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer17" style="display: none;">
+                    <label for="nota17">Nota:</label>
+                    <textarea id="nota17" name="nota_luces_laterales" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion18">BAJAS:</label>
+                    <select id="seleccion18" name="bajas" onchange="mostrarNota('notaContainer18', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer18" style="display: none;">
+                    <label for="nota18">Nota:</label>
+                    <textarea id="nota18" name="nota_bajas" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion19">FRENO:</label>
+                    <select id="seleccion19" name="freno" onchange="mostrarNota('notaContainer19', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer19" style="display: none;">
+                    <label for="nota19">Nota:</label>
+                    <textarea id="nota19" name="nota_freno" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion20">ESTACIONARIAS:</label>
+                    <select id="seleccion20" name="estacionarias" onchange="mostrarNota('notaContainer20', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer20" style="display: none;">
+                    <label for="nota20">Nota:</label>
+                    <textarea id="nota20" name="nota_estacionarias" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion21">LUZ PLACA:</label>
+                    <select id="seleccion21" name="placa" onchange="mostrarNota('notaContainer21', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENA">BUENA</option>
+                        <option value="MALA">MALA</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer21" style="display: none;">
+                    <label for="nota21">Nota:</label>
+                    <textarea id="nota21" name="nota_placa" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion22">EXPLORADORAS:</label>
+                    <select id="seleccion22" name="exploradoras_luz" onchange="mostrarNota('notaContainer22', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer22" style="display: none;">
+                    <label for="nota22">Nota:</label>
+                    <textarea id="nota22" name="nota_exploradoras_luz" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seleccion23">ANTINIEBLA:</label>
+                    <select id="seleccion23" name="antinieblas" onchange="mostrarNota('notaContainer23', this)">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="BUENAS">BUENAS</option>
+                        <option value="MALAS">MALAS</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="notaContainer23" style="display: none;">
+                    <label for="nota23">Nota:</label>
+                    <textarea id="nota23" name="nota_antinieblas" rows="4" placeholder="Agrega una nota aquí..." maxlength="35"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="rechazado_datos_luces">RECHAZADO:</label>
+                    <select id="rechazado_datos_luces" name="rechazado_datos_luces" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+            </div>   
+
+            <div class="section">
+                <div class="section-title">VIDRIOS</div>
+
+                <div class="form-group">
+                    <label for="panoramico_del">PANORAMICO DEL:</label>      
+                    <div class="checkbox-group seccion" data-nombre="Sección 62">
+                        <input type="checkbox" id="panoramico_del_bueno" name="panoramico_del[]" value="BUENO">
+                        <label for="panoramico_del_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="panoramico_del_rayado" name="panoramico_del[]" value="RAYADO">
+                        <label for="panoramico_del_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="panoramico_del_fisurado" name="panoramico_del[]" value="FISURADO">
+                        <label for="panoramico_del_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="panoramico_del_roto" name="panoramico_del[]" value="ROTO">
+                        <label for="panoramico_del_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="panoramico_del_manchado" name="panoramico_del[]" value="MANCHADO">
+                        <label for="panoramico_del_manchado">MANCHADO</label>
+
+                        <input type="checkbox" id="panoramico_del_N/A" name="panoramico_del[]" value="N/A">
+                        <label for="panoramico_del_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="farola_der">FAROLA DER:</label>     
+                    <div class="checkbox-group seccion" data-nombre="Sección 61">
+                        <input type="checkbox" id="farola_der_bueno" name="farola_der[]" value="BUENA">
+                        <label for="farola_der_bueno">BUENA</label>
+                
+                        <input type="checkbox" id="farola_der_rayado" name="farola_der[]" value="RAYADA">
+                        <label for="farola_der_rayado">RAYADA</label>
+                
+                        <input type="checkbox" id="farola_der_fisurado" name="farola_der[]" value="FISURADA">
+                        <label for="farola_der_fisurado">FISURADA</label>
+                
+                        <input type="checkbox" id="farola_der_roto" name="farola_der[]" value="ROTA">
+                        <label for="farola_der_roto">ROTA</label>
+                
+                        <input type="checkbox" id="farola_der_deteriorada" name="farola_der[]" value="DETERIORADA">
+                        <label for="farola_der_deteriorada">DETERIORADA</label>
+
+                        <input type="checkbox" id="farola_der_N/A" name="farola_der[]" value="N/A">
+                        <label for="farola_der_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="farola_izq">FAROLA IZQ:</label>            
+                    <div class="checkbox-group seccion" data-nombre="Sección 69">
+                        <input type="checkbox" id="farola_izq_bueno" name="farola_izq[]" value="BUENA">
+                        <label for="farola_izq_bueno">BUENA</label>
+                        
+                        <input type="checkbox" id="farola_izq_rayado" name="farola_izq[]" value="RAYADA">
+                        <label for="farola_izq_rayado">RAYADA</label>
+                        
+                        <input type="checkbox" id="farola_izq_fisurado" name="farola_izq[]" value="FISURADA">
+                        <label for="farola_izq_fisurado">FISURADA</label>
+                        
+                        <input type="checkbox" id="farola_izq_roto" name="farola_izq[]" value="ROTA">
+                        <label for="farola_izq_roto">ROTA</label>
+                        
+                        <input type="checkbox" id="farola_izq_deteriorada" name="farola_izq[]" value="DETERIORADA">
+                        <label for="farola_izq_deteriorada">DETERIORADA</label>
+
+                        <input type="checkbox" id="farola_izq_N/A" name="farola_izq[]" value="N/A">
+                        <label for="farola_izq_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="exploradoras">EXPLORADORAS:</label>           
+                    <div class="checkbox-group seccion" data-nombre="Sección 68">
+                        <input type="checkbox" id="exploradoras_bueno" name="exploradoras[]" value="BUENAS">
+                        <label for="exploradoras_bueno">BUENAS</label>
+                        
+                        <input type="checkbox" id="exploradoras_rayado" name="exploradoras[]" value="RAYADAS">
+                        <label for="exploradoras_rayado">RAYADAS</label>
+                        
+                        <input type="checkbox" id="exploradoras_fisurado" name="exploradoras[]" value="FISURADAS">
+                        <label for="exploradoras_fisurado">FISURADAS</label>
+                        
+                        <input type="checkbox" id="exploradoras_roto" name="exploradoras[]" value="ROTAS">
+                        <label for="exploradoras_roto">ROTAS</label>
+                        
+                        <input type="checkbox" id="exploradoras_deterioradas" name="exploradoras[]" value="DETERIORADAS">
+                        <label for="exploradoras_deterioradas">DETERIORADAS</label>
+
+                        <input type="checkbox" id="exploradoras_N/A" name="exploradoras[]" value="N/A">
+                        <label for="exploradoras_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="antiniebla">ANTINIEBLAS:</label>   
+                    <div class="checkbox-group seccion" data-nombre="Sección 59">
+                        <input type="checkbox" id="antiniebla_bueno" name="antiniebla[]" value="BUENAS">
+                        <label for="antiniebla_bueno">BUENAS</label>
+                
+                        <input type="checkbox" id="antiniebla_rayado" name="antiniebla[]" value="RAYADAS">
+                        <label for="antiniebla_rayado">RAYADAS</label>
+                
+                        <input type="checkbox" id="antiniebla_fisurado" name="antiniebla[]" value="FISURADAS">
+                        <label for="antiniebla_fisurado">FISURADAS</label>
+                
+                        <input type="checkbox" id="antiniebla_roto" name="antiniebla[]" value="ROTAS">
+                        <label for="antiniebla_roto">ROTAS</label>
+                
+                        <input type="checkbox" id="antiniebla_deterioradas" name="antiniebla[]" value="DETERIORADAS">
+                        <label for="antiniebla_deterioradas">DETERIORADAS</label>
+
+                        <input type="checkbox" id="antiniebla_N/A" name="antiniebla[]" value="N/A">
+                        <label for="antiniebla_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="espejo_izq">ESPEJO IZQ:</label>    
+                    <div class="checkbox-group seccion" data-nombre="Sección 60">
+                        <input type="checkbox" id="espejo_izq_bueno" name="espejo_izq[]" value="BUENO">
+                        <label for="espejo_izq_bueno">BUENO</label>
+                
+                        <input type="checkbox" id="espejo_izq_rayado" name="espejo_izq[]" value="RAYADO">
+                        <label for="espejo_izq_rayado">RAYADO</label>
+                
+                        <input type="checkbox" id="espejo_izq_roto" name="espejo_izq[]" value="ROTO">
+                        <label for="espejo_izq_roto">ROTO</label>
+                
+                        <input type="checkbox" id="espejo_izq_faltante" name="espejo_izq[]" value="FALTANTE">
+                        <label for="espejo_izq_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="espejo_izq_N/A" name="espejo_izq[]" value="N/A">
+                        <label for="espejo_izq_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="espejo_der">ESPEJO DER:</label>          
+                    <div class="checkbox-group seccion" data-nombre="Sección 67">
+                        <input type="checkbox" id="espejo_der_bueno" name="espejo_der[]" value="BUENO">
+                        <label for="espejo_der_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="espejo_der_rayado" name="espejo_der[]" value="RAYADO">
+                        <label for="espejo_der_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="espejo_der_roto" name="espejo_der[]" value="ROTO">
+                        <label for="espejo_der_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="espejo_der_faltante" name="espejo_der[]" value="FALTANTE">
+                        <label for="espejo_der_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="espejo_der_N/A" name="espejo_der[]" value="N/A">
+                        <label for="espejo_der_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="vidrios_del_izq">VIDRIOS DEL. IZQ:</label>         
+                    <div class="checkbox-group seccion" data-nombre="Sección 65">
+                        <input type="checkbox" id="vidrios_del_izq_bueno" name="vidrios_del_izq[]" value="BUENO">
+                        <label for="vidrios_del_izq_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_izq_rayado" name="vidrios_del_izq[]" value="RAYADO">
+                        <label for="vidrios_del_izq_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_izq_fisurado" name="vidrios_del_izq[]" value="FISURADO">
+                        <label for="vidrios_del_izq_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_izq_roto" name="vidrios_del_izq[]" value="ROTO">
+                        <label for="vidrios_del_izq_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_izq_deteriorado" name="vidrios_del_izq[]" value="DETERIORADO POR USO">
+                        <label for="vidrios_del_izq_deteriorado">DETERIORADO POR USO</label>
+
+                        <input type="checkbox" id="vidrios_del_izq_faltante" name="vidrios_del_izq[]" value="FALTANTE">
+                        <label for="vidrios_del_izq_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="vidrios_del_izq_N/A" name="vidrios_del_izq[]" value="N/A">
+                        <label for="vidrios_del_izq_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="vidrios_tra_izq">VIDRIOS TRA. IZQ:</label>          
+                    <div class="checkbox-group seccion" data-nombre="Sección 66">
+                        <input type="checkbox" id="vidrios_tra_izq_bueno" name="vidrios_tra_izq[]" value="BUENO">
+                        <label for="vidrios_tra_izq_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_izq_rayado" name="vidrios_tra_izq[]" value="RAYADO">
+                        <label for="vidrios_tra_izq_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_izq_fisurado" name="vidrios_tra_izq[]" value="FISURADO">
+                        <label for="vidrios_tra_izq_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_izq_roto" name="vidrios_tra_izq[]" value="ROTO">
+                        <label for="vidrios_tra_izq_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_izq_deteriorado" name="vidrios_tra_izq[]" value="DETERIORADO POR USO">
+                        <label for="vidrios_tra_izq_deteriorado">DETERIORADO POR USO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_izq_faltante" name="vidrios_tra_izq[]" value="FALTANTE">
+                        <label for="vidrios_tra_izq_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="vidrios_tra_izq_N/A" name="vidrios_tra_izq[]" value="N/A">
+                        <label for="vidrios_tra_izq_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="stop_izq">STOP IZQ:</label>              
+                    <div class="checkbox-group seccion" data-nombre="Sección 71">
+                        <input type="checkbox" id="stop_izq_bueno" name="stop_izq[]" value="BUENO">
+                        <label for="stop_izq_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="stop_izq_rayado" name="stop_izq[]" value="RAYADO">
+                        <label for="stop_izq_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="stop_izq_fisurado" name="stop_izq[]" value="FISURADO">
+                        <label for="stop_izq_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="stop_izq_roto" name="stop_izq[]" value="ROTO">
+                        <label for="stop_izq_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="stop_izq_quemado" name="stop_izq[]" value="QUEMADO">
+                        <label for="stop_izq_quemado">QUEMADO</label>
+                        
+                        <input type="checkbox" id="stop_izq_faltante" name="stop_izq[]" value="FALTANTE">
+                        <label for="stop_izq_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="stop_izq_N/A" name="stop_izq[]" value="N/A">
+                        <label for="stop_izq_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="stop_der">STOP DER:</label>       
+                    <div class="checkbox-group seccion" data-nombre="Sección 63">
+                        <input type="checkbox" id="stop_der_bueno" name="stop_der[]" value="BUENO">
+                        <label for="stop_der_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="stop_der_rayado" name="stop_der[]" value="RAYADO">
+                        <label for="stop_der_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="stop_der_fisurado" name="stop_der[]" value="FISURADO">
+                        <label for="stop_der_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="stop_der_roto" name="stop_der[]" value="ROTO">
+                        <label for="stop_der_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="stop_der_quemado" name="stop_der[]" value="QUEMADO">
+                        <label for="stop_der_quemado">QUEMADO</label>
+                        
+                        <input type="checkbox" id="stop_der_faltante" name="stop_der[]" value="FALTANTE">
+                        <label for="stop_der_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="stop_der_N/A" name="stop_der[]" value="N/A">
+                        <label for="stop_der_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="tercer_stop">TERCER STOP:</label>        
+                    <div class="checkbox-group seccion" data-nombre="Sección 64">
+                        <input type="checkbox" id="tercer_stop_bueno" name="tercer_stop[]" value="BUENO">
+                        <label for="tercer_stop_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="tercer_stop_rayado" name="tercer_stop[]" value="RAYADO">
+                        <label for="tercer_stop_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="tercer_stop_fisurado" name="tercer_stop[]" value="FISURADO">
+                        <label for="tercer_stop_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="tercer_stop_roto" name="tercer_stop[]" value="ROTO">
+                        <label for="tercer_stop_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="tercer_stop_quemado" name="tercer_stop[]" value="QUEMADO">
+                        <label for="tercer_stop_quemado">QUEMADO</label>
+                        
+                        <input type="checkbox" id="tercer_stop_faltante" name="tercer_stop[]" value="FALTANTE">
+                        <label for="tercer_stop_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="tercer_stop_N/A" name="tercer_stop[]" value="N/A">
+                        <label for="tercer_stop_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="panoramico_tra">PANORAMICO TRA:</label>             
+                    <div class="checkbox-group seccion" data-nombre="Sección 70">
+                        <input type="checkbox" id="panoramico_tra_bueno" name="panoramico_tra[]" value="BUENO">
+                        <label for="panoramico_tra_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="panoramico_tra_rayado" name="panoramico_tra[]" value="RAYADO">
+                        <label for="panoramico_tra_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="panoramico_tra_fisurado" name="panoramico_tra[]" value="FISURADO">
+                        <label for="panoramico_tra_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="panoramico_tra_roto" name="panoramico_tra[]" value="ROTO">
+                        <label for="panoramico_tra_roto">ROTO</label>
+
+                        <input type="checkbox" id="panoramico_tra_N/A" name="panoramico_tra[]" value="N/A">
+                        <label for="panoramico_tra_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="vidrios_custodios">VIDRIOS CUSTODIOS:</label>                
+                    <div class="checkbox-group seccion" data-nombre="Sección 73">
+                        <input type="checkbox" id="vidrios_custodios_bueno" name="vidrios_custodios[]" value="BUENO">
+                        <label for="vidrios_custodios_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="vidrios_custodios_rayado" name="vidrios_custodios[]" value="RAYADO">
+                        <label for="vidrios_custodios_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="vidrios_custodios_fisurado" name="vidrios_custodios[]" value="FISURADO">
+                        <label for="vidrios_custodios_fisurado">FISURADO</label>
+                        
+                        <input type="checkbox" id="vidrios_custodios_roto" name="vidrios_custodios[]" value="ROTO">
+                        <label for="vidrios_custodios_roto">ROTO</label>
+
+                        <input type="checkbox" id="vidrios_custodios_N/A" name="vidrios_custodios[]" value="N/A">
+                        <label for="vidrios_custodios_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="vidrios_tra_der">VIDRIOS TRA. DER:</label>                 
+                    <div class="checkbox-group seccion" data-nombre="Sección 74">
+                        <input type="checkbox" id="vidrios_tra_der_bueno" name="vidrios_tra_der[]" value="BUENO">
+                        <label for="vidrios_tra_der_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_der_rayado" name="vidrios_tra_der[]" value="RAYADO">
+                        <label for="vidrios_tra_der_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="vidrios_tra_der_roto" name="vidrios_tra_der[]" value="ROTO">
+                        <label for="vidrios_tra_der_roto">ROTO</label>
+
+                        <input type="checkbox" id="vidrios_tra_der_faltante" name="vidrios_tra_der[]" value="FALTANTE">
+                        <label for="vidrios_tra_der_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="vidrios_tra_der_N/A" name="vidrios_tra_der[]" value="N/A">
+                        <label for="vidrios_tra_der_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="vidrios_del_der">VIDRIOS DEL. DER:</label>               
+                    <div class="checkbox-group seccion" data-nombre="Sección 72">
+                        <input type="checkbox" id="vidrios_del_der_bueno" name="vidrios_del_der[]" value="BUENO">
+                        <label for="vidrios_del_der_bueno">BUENO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_der_rayado" name="vidrios_del_der[]" value="RAYADO">
+                        <label for="vidrios_del_der_rayado">RAYADO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_der_roto" name="vidrios_del_der[]" value="ROTO">
+                        <label for="vidrios_del_der_roto">ROTO</label>
+                        
+                        <input type="checkbox" id="vidrios_del_der_faltante" name="vidrios_del_der[]" value="FALTANTE">
+                        <label for="vidrios_del_der_faltante">FALTANTE</label>
+
+                        <input type="checkbox" id="vidrios_del_der_N/A" name="vidrios_del_der[]" value="N/A">
+                        <label for="vidrios_del_der_N/A">N/A</label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="rechazado_datos_vidrios">RECHAZADO:</label>
+                    <select id="rechazado_datos_vidrios" name="rechazado_datos_vidrios" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+            </div>  
+
+            <div class="section">
+                <div class="section-title">LLANTAS</div>
+                <div class="llantas"><h3>Porcentaje:</h3></div>
+                <div class="form-group llantas">
+                    <input type="number" id="porcentaje1" name="llantas_del_der" min="0" max="100" step="10" >
+                    <label for="nota1">LLANTAS DEL. DER:</label>
+                    <textarea id="nota1" name="llantas_del_der_nota" class="nota" rows="1"></textarea>
+                </div>
+                <div class="form-group llantas">
+                    <input type="number" id="porcentaje2" name="llantas_tra_der" min="0" max="100" step="10" >
+                    <label for="nota2">LLANTA TRA. DER:</label>
+                    <textarea id="nota2" name="llantas_tra_der_nota" class="nota" rows="1"></textarea>
+                </div>
+                <div class="form-group llantas">
+                    <input type="number" id="porcentaje3" name="llanta_reemplazo" min="0" max="100" step="10" >
+                    <label for="nota3">LLANTA REP:</label>
+                    <textarea id="nota3" name="llanta_reemplazo_nota" class="nota" rows="1"></textarea>
+                </div>
+                <div class="form-group llantas">
+                    <input type="number" id="porcentaje4" name="llantas_del_izq" min="0" max="100" step="10" >
+                    <label for="nota4">LLANTAS DEL. IZQ:</label>
+                    <textarea id="nota4" name="llantas_del_izq_nota" class="nota" rows="1"></textarea>
+                </div>
+                <div class="form-group llantas">
+                    <input type="number" id="porcentaje5" name="llantas_tra_izq" min="0" max="100" step="10" >
+                    <label for="nota5">LLANTA TRA. IZQ:</label>
+                    <textarea id="nota5" name="llantas_tra_izq_nota" class="nota" rows="1"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="rechazado_datos_llantas">RECHAZADO:</label>
+                    <select id="rechazado_datos_llantas" name="rechazado_datos_llantas" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <div class="section" id="fugas-section"> 
+                <div class="section-title">FUGAS</div>
+                <div class="form-group">
+                    <label for="aceite_de_motor_datos">ACEITE DE MOTOR:</label>
+                    <select id="aceite_de_motor_datos" name="aceite_de_motor_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aceite_de_caja_datos">ACEITE DE CAJA:</label>
+                    <select id="aceite_de_caja_datos" name="aceite_de_caja_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="liquido_de_frenos_datos">LIQUIDO DE FRENOS:</label>
+                    <select id="liquido_de_frenos_datos" name="liquido_de_frenos_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amortiguadores_delanteros_datos">AMORTIGUADORES DELANTEROS:</label>
+                    <select id="amortiguadores_delanteros_datos" name="amortiguadores_delanteros_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aceite_hidraulicos_datos">ACEITE HIDRÁULICO:</label>
+                    <select id="aceite_hidraulicos_datos" name="aceite_hidraulicos_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="refrigerante_datos">REFRIGERANTE:</label>
+                    <select id="refrigerante_datos" name="refrigerante_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="compresor_aa_datos">COMPRESOR AA:</label> 
+                    <select id="compresor_aa_datos" name="compresor_aa_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amortiguadores_traseros_datos">AMORTIGUADORES TRASEROS:</label> 
+                    <select id="amortiguadores_traseros_datos" name="amortiguadores_traseros_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="juntas_homocineticas_datos">JUNTAS HOMOCINETICAS:</label> 
+                    <select id="juntas_homocineticas_datos" name="juntas_homocineticas_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rechazado_datos">RECHAZADO:</label>
+                    <select id="rechazado_datos" name="rechazado_datos_fugas" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="section" id="niveles-section">
+                <div class="section-title">NIVELES</div>
+            
+                <div class="form-group">
+                    <label for="aceite_motor_datos">ACEITE MOTOR:</label>
+                    <select id="aceite_motor_datos" name="aceite_motor_niveles" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ACEPTABLE">ACEPTABLE</option>
+                        <option value="BAJO NIVEL">BAJO NIVEL</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="aceite_hidraulico_datos">ACEITE HIDRÁULICO:</label>
+                    <select id="aceite_hidraulico_datos" name="aceite_hidraulico_niveles" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ACEPTABLE">ACEPTABLE</option>
+                        <option value="BAJO NIVEL">BAJO NIVEL</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="lavaparabrisas_datos">LAVAPARABRISAS:</label>
+                    <select id="lavaparabrisas_datos" name="lavaparabrisas_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ACEPTABLE">ACEPTABLE</option>
+                        <option value="BAJO NIVEL">BAJO NIVEL</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="refrigerante_datosn">REFRIGERANTE:</label>
+                    <select id="refrigerante_datosn" name="refrigerante_niveles" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ACEPTABLE">ACEPTABLE</option>
+                        <option value="BAJO NIVEL">BAJO NIVEL</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="liquido_frenos_datos">LÍQUIDO DE FRENOS:</label>
+                    <select id="liquido_frenos_datos" name="liquido_frenos_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ACEPTABLE">ACEPTABLE</option>
+                        <option value="BAJO NIVEL">BAJO NIVEL</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="rechazado_datos_niveles">RECHAZADO:</label>
+                    <select id="rechazado_datos_niveles" name="rechazado_datos_niveles" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+            </div>
+            
+
+            <div class="section" id="testigos-section">
+                <div class="section-title">TESTIGOS</div>
+            
+                <div class="form-group">
+                    <label for="check_engine_datos">CHECK ENGINE:</label>
+                    <select id="check_engine_datos" name="check_engine_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ENCENDIDO">ENCENDIDO</option>
+                        <option value="APAGADO">APAGADO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="testigo_abs_datos">TESTIGO ABS:</label>
+                    <select id="testigo_abs_datos" name="testigo_abs_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ENCENDIDO">ENCENDIDO</option>
+                        <option value="APAGADO">APAGADO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="control_traccion_datos">CONTROL TRACCIÓN:</label>
+                    <select id="control_traccion_datos" name="control_traccion_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ENCENDIDO">ENCENDIDO</option>
+                        <option value="APAGADO">APAGADO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="testigo_airbag_datos">TESTIGO AIRBAG:</label>
+                    <select id="testigo_airbag_datos" name="testigo_airbag_datos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ENCENDIDO">ENCENDIDO</option>
+                        <option value="APAGADO">APAGADO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="testigo_alerta_frenos">TESTIGO FRENOS:</label>
+                    <select id="testigo_alerta_frenos" name="testigo_alerta_frenos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="ENCENDIDO">ENCENDIDO</option>
+                        <option value="APAGADO">APAGADO</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="rechazado_testigos">RECHAZADO:</label>
+                    <select id="rechazado_testigos" name="rechazado_testigos" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+            </div>
+            
+            
+            <div class="section">
+                    <div class="section-title">RECHAZOS</div>
+                    <div class="form-group">
+                        <label for="rechazado_politicas">RECHAZADO POR POLITICAS:</label>
+                        <select id="rechazado_politicas" name="rechazado_politicas" required>
+                            <option value="" selected disabled>Selecciona una opción</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+            </div>   
+
+            <div class="section" id="accesorio">
+                <div class="section-title">ACCESORIOS</div>
+                <div class="form-group accesorios">
+                    <input type="text" name="marca[]" placeholder="Marca" >
+                    <input type="text" name="descripcion[]" placeholder="Descripción" >
+                </div>
+                <button type="button" class="btn-agregar boton" onclick="agregarCampos(event)">+</button>
+                <button type="button" class="btn-eliminar boton" onclick="eliminarCampos()">Eliminar último</button>
+                
+            </div>  
+
+            <div class="section">
+                <div class="section-title">OBSERVACIONES GENERALES</div>
+                <div class="form-group">
+                    <label for="observaciones">OBSERVACIONES:</label>
+                    <textarea id="observaciones" name="comentario" rows="4" placeholder="Escribe tus observaciones aquí"></textarea>
+                </div>
+            </div>  
+            <div class="section imagen">
+                    <div class="section-title">IMÁGENES</div>
+                    <div class="form-group">
+                        <label for="imagenes">SUBIR IMÁGENES:</label>
+                        <label class="button img" for="imagenes">Elegir archivos</label>
+                        <span class="file-name" id="file-name">No se han seleccionado archivos</span>
+                        <input type="file" id="imagenes" name="imagenes[]" accept="image/*" multiple onchange="validarCantidad()" required>
+                    </div>
+            </div> 
+
+            <div class="section">
+                <div class="form-group">
+                    <label for="perito">PERITO:</label>
+                    <input type="text" id="perito" name="perito" required>
+                </div>
+            </div>
+            <div class="bot-enviar">
+                <input class="boton-envio" type="submit" value="Generar PDF">
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'js/accesorios.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/botones.js' %}"></script>
+    <script src="{% static 'js/checkbox.js' %}"></script>
+    <script src="{% static 'js/imagenes.js' %}"></script>
+    <script src="{% static 'js/nota.js' %}"></script>
+    <script src="{% static 'js/fugas.js' %}"></script>
+    <script src="{% static 'js/niveles.js' %}"></script>
+    <script src="{% static 'js/testigos.js' %}"></script>
+    
+{% endblock %}
+
+
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block estilos %}<link rel="stylesheet" href="{% static 'css/index.css' %}">{% endblock %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block nav %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    
+
+    <div class="contenedor">
+        <h1>Consorcio Mundial y Especializados SAS</h1>
+        <a href="{% url 'generar_pdf' %}" class=".boton">Formulario</a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
