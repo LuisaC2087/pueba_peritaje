@@ -55,6 +55,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'peritajes.wsgi.application'
 
 
