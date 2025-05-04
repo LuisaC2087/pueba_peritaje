@@ -12,8 +12,10 @@ AUTH_USER_MODEL = 'peritajes_app.Usuario'
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-^wl-^ulgo81=j4v!_eopv@jx3pzm+yf&ymz@nqg2ki#5x&-xab')
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+
+DEBUG = True
 ALLOWED_HOSTS = ['*']
+
 
 
 
