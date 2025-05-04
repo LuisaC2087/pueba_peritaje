@@ -42,7 +42,7 @@ ROOT_URLCONF = 'peritajes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["Peritajes_app/Templates"],
+        'DIRS': ["peritajes_app/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,7 +105,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'Peritajes_app' / 'Public']
+STATICFILES_DIRS = [BASE_DIR / 'peritajes_app' / 'Public']
 
 
 # Default primary key field type
