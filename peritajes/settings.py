@@ -2,10 +2,7 @@
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 AUTH_USER_MODEL = 'peritajes_app.Usuario'
 # Quick-start development settings - unsuitable for production
@@ -107,9 +104,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
 
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'Peritajes_app' / 'Public']
 
 
 # Default primary key field type
