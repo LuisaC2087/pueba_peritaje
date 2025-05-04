@@ -79,13 +79,24 @@ h1 {
 
 /* Móviles muy pequeños */
 @media (max-width: 480px) {
+    .contenedor {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 30px;
+        height: auto;
+    }
+
     h1 {
         font-size: 28px;
         margin: 10px auto;
+        text-align: center;
+        width: 90%;
     }
 
     a {
         font-size: 16px;
         padding: 6px 10px;
+        margin: 10px 0;
     }
 }
