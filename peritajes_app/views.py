@@ -253,17 +253,22 @@ def generar_pdf(request):
 
         datos['accesorios'] = accesorios
         
+        # Cargar la plantilla con los datos
+        template = get_template('plantilla_pdf.html')
+        html = template.render(datos)
 
+        # Ruta absoluta al CSS
+        css_path = os.path.join(settings.BASE_DIR, 'static', 'css', 'formato.css')
 
-        html_string = render(request, 'pdf_template.html', datos).content.decode('utf-8')
+        # Generar PDF con estilos
+        pdf_file = HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+            stylesheets=[CSS(filename=css_path)]
+        )
 
-        # Crear PDF temporalmente
-        with tempfile.NamedTemporaryFile(delete=True, suffix=".pdf") as output:
-            HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(output.name)
-            output.seek(0)
-            response = HttpResponse(output.read(), content_type='application/pdf')
-            response['Content-Disposition'] = 'inline; filename="informe.pdf"'
-            return response
+        # Retornar el PDF
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = 'filename="reporte.pdf"'
+        return response
 
     else:
         return render(request, 'formulario.html')
