@@ -255,36 +255,17 @@ def generar_pdf(request):
         
 
 
-        # Renderizar el HTML
-        html_string = render(request, 'pdf_template.html', {
-            'datos': datos,
-            'accesorios': accesorios
-        }).content.decode('utf-8')
+        html_string = render(request, 'pdf_template.html', datos).content.decode('utf-8')
 
-        # ✅ Obtener la ruta absoluta del archivo CSS en el sistema
-        css_path = finders.find('css/formato.css')
-
-        # Usar un archivo temporal para guardar el PDF
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
-            temp_path = temp_file.name
-
-        try:
-            # Generar el PDF y guardarlo en el archivo temporal
-            HTML(string=html_string).write_pdf(temp_path, stylesheets=[CSS(filename=css_path)])
-
-            # Leer y enviar el archivo como respuesta HTTP
-            with open(temp_path, 'rb') as pdf_file:
-                response = HttpResponse(pdf_file.read(), content_type='application/pdf')
-                response['Content-Disposition'] = 'inline; filename="peritaje.pdf"'
-                return response
-
-        except Exception as e:
-            import traceback
-            return HttpResponse(f"Error al generar el PDF: {e}\n\n{traceback.format_exc()}", status=500)
-
-        finally:
-            if os.path.exists(temp_path):
-                os.remove(temp_path)
+        # Crear PDF temporalmente
+        with tempfile.NamedTemporaryFile(delete=True, suffix=".pdf") as output:
+            HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(output.name)
+            output.seek(0)
+            response = HttpResponse(output.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'inline; filename="informe.pdf"'
+            return response
 
     else:
         return render(request, 'formulario.html')
+
+
