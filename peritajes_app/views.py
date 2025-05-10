@@ -4,8 +4,9 @@ from weasyprint import HTML, CSS
 from django.conf import settings
 from django.templatetags.static import static
 from datetime import datetime
-from django.contrib.staticfiles import finders
-import tempfile, os
+from django.contrib.staticfiles import finder
+from django.template.loader import get_template
+import os
 
 def home(request):
     return render(request, 'index.html')
