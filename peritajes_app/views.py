@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from weasyprint import HTML, CSS
 from django.conf import settings
-import tempfile
-import os
 from django.templatetags.static import static
 from datetime import datetime
+from django.contrib.staticfiles import finders
+import tempfile, os
 
 def home(request):
     return render(request, 'index.html')
@@ -257,32 +257,34 @@ def generar_pdf(request):
 
         # Renderizar el HTML
         html_string = render(request, 'pdf_template.html', {
-            'datos': datos, 
-            'accesorios': datos.get('accesorios', [])  # Asegurar que accesorios esté en el contexto
+            'datos': datos,
+            'accesorios': accesorios
         }).content.decode('utf-8')
 
-        # Ruta absoluta al archivo CSS
-        css_path = request.build_absolute_uri(static('css/formato.css'))
+        # ✅ Obtener la ruta absoluta del archivo CSS en el sistema
+        css_path = finders.find('css/formato.css')
 
         # Usar un archivo temporal para guardar el PDF
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
             temp_path = temp_file.name
+
         try:
             # Generar el PDF y guardarlo en el archivo temporal
-            HTML(string=html_string).write_pdf(temp_path, stylesheets=[CSS(css_path)])
+            HTML(string=html_string).write_pdf(temp_path, stylesheets=[CSS(filename=css_path)])
 
             # Leer y enviar el archivo como respuesta HTTP
             with open(temp_path, 'rb') as pdf_file:
                 response = HttpResponse(pdf_file.read(), content_type='application/pdf')
                 response['Content-Disposition'] = 'inline; filename="peritaje.pdf"'
                 return response
+
         except Exception as e:
-            # Manejo de errores
-            return HttpResponse(f"Error al generar el PDF: {e}", status=500)
+            import traceback
+            return HttpResponse(f"Error al generar el PDF: {e}\n\n{traceback.format_exc()}", status=500)
+
         finally:
-            # Eliminar el archivo temporal
             if os.path.exists(temp_path):
                 os.remove(temp_path)
+
     else:
-        # Si no es una solicitud POST, renderizar el formulario
         return render(request, 'formulario.html')
