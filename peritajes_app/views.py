@@ -9,6 +9,7 @@ from django.template.loader import get_template
 import os
 from PIL import Image, ImageResampling
 from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 def home(request):
@@ -238,7 +239,48 @@ def generar_pdf(request):
         }
         
         
-        datos['imagenes_rutas'] = procesar_y_guardar_imagenes(request)
+        imagenes_rutas = []
+        
+        # Proceso de manejo de imágenes
+        for imagen in request.FILES.getlist('imagenes[]'):
+            # Abrir la imagen usando Pillow
+            img = Image.open(imagen)
+            
+            # Ajustar el tamaño y el modo de la imagen para reducir el tamaño
+            try:
+                resample_mode = Image.Resampling.LANCZOS
+            except AttributeError:
+                resample_mode = Image.LANCZOS
+            
+            # Redimensionar la imagen si es necesario, aquí puedes poner tu lógica de tamaño
+            img = img.resize((800, 800), resample=resample_mode)  # Cambia las dimensiones como quieras
+            
+            # Comprimir la imagen para reducir el tamaño (si es una imagen JPG)
+            if img.mode != 'RGB':
+                img = img.convert('RGB')  # Convertir a RGB si es necesario
+
+            # Guardar la imagen comprimida en memoria (sin escribir en disco)
+            img_io = BytesIO()
+            img.save(img_io, format='JPEG', quality=85)  # Ajusta la calidad a tu preferencia
+            img_io.seek(0)
+
+            # Convertir la imagen comprimida en un archivo de memoria
+            imagen_comprimida = InMemoryUploadedFile(
+                img_io, None, imagen.name, 'image/jpeg', img_io.tell(), None
+            )
+
+            # Guardar la imagen en el sistema
+            ruta_absoluta = os.path.join(settings.MEDIA_ROOT, imagen.name)
+            with open(ruta_absoluta, 'wb') as f:
+                for chunk in imagen_comprimida.chunks():
+                    f.write(chunk)
+            
+            # Generar la URL absoluta de la imagen
+            imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{imagen.name}")
+            imagenes_rutas.append(imagen_url)
+        
+        # Añadir las rutas de las imágenes al contexto
+        datos = {'imagenes_rutas': imagenes_rutas}
 
         datos['accesorios'] = accesorios
         
@@ -261,39 +303,3 @@ def generar_pdf(request):
 
     else:
         return render(request, 'formulario.html')
-
-def procesar_y_guardar_imagenes(request):
-    imagenes_rutas = []
-
-    for imagen in request.FILES.getlist('imagenes[]'):
-        # Abrir imagen
-        img = Image.open(imagen)
-
-        # Convertir a RGB si no lo está
-        if img.mode in ("RGBA", "P"):
-            img = img.convert("RGB")
-
-        # Redimensionar si es muy grande
-        max_ancho = 1024
-        if img.width > max_ancho:
-            proporcion = max_ancho / float(img.width)
-            nuevo_alto = int(float(img.height) * proporcion)
-            img = img.resize((max_ancho, nuevo_alto), ImageResampling.LANCZOS)
-
-        # Comprimir y guardar como JPEG
-        buffer = BytesIO()
-        img.save(buffer, format='JPEG', quality=70, optimize=True)
-        buffer.seek(0)
-
-        # Crear nombre y ruta
-        nombre_archivo = os.path.splitext(imagen.name)[0] + "_comprimida.jpg"
-        ruta_absoluta = os.path.join(settings.MEDIA_ROOT, nombre_archivo)
-
-        with open(ruta_absoluta, 'wb') as f:
-            f.write(buffer.read())
-
-        # Agregar la URL accesible
-        imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{nombre_archivo}")
-        imagenes_rutas.append(imagen_url)
-
-    return imagenes_rutas
