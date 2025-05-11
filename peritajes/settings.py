@@ -43,7 +43,7 @@ ROOT_URLCONF = 'peritajes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'peritajes_app' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
