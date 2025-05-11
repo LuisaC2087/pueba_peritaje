@@ -255,7 +255,7 @@ def generar_pdf(request):
         datos['accesorios'] = accesorios
         
         # Cargar la plantilla con los datos
-        template = get_template('plantilla_pdf.html')
+        template = get_template('pdf_template.html')
         html = template.render(datos)
 
         # Ruta absoluta al CSS
