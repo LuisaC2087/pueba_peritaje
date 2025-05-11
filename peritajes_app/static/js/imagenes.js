@@ -19,7 +19,7 @@ function validarCantidad() {
       alert("Debes subir al menos 2 imágenes.");
       input.value = ""; // Limpiar el input
       fileNameDisplay.textContent = "No se han seleccionado archivos";
-    } else if (archivos.length > 10) {
+    } else if (archivos.length > 5) {
       alert("No puedes subir más de 10 imágenes.");
       input.value = ""; // Limpiar el input
       fileNameDisplay.textContent = "No se han seleccionado archivos";
