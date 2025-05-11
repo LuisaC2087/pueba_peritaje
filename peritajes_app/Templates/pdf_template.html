@@ -787,8 +787,10 @@
             </div>
             <div class="section-content">
                 <div style="margin-top: 10px; padding: 0 12px 20px;">
-                    {% for ruta in imagenes_rutas %}
-                    <img src="{{ ruta }}" alt="Imagen subida">
+                    {% for imagen in imagenes_rutas %}
+                    <div style="width: 200px;">
+                        <img src="{{ imagen }}" alt="Imagen" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+                    </div>
                     {% endfor %}
                 </div>
             </div>

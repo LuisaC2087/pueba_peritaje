@@ -7,7 +7,7 @@ from datetime import datetime
 from django.contrib.staticfiles import finders
 from django.template.loader import get_template
 import os
-
+from PIL import Image
 def home(request):
     return render(request, 'index.html')
 
@@ -235,21 +235,34 @@ def generar_pdf(request):
         }
         
 
-
-
-        # Guardar imágenes y obtener las rutas absolutas
         imagenes_rutas = []
         for imagen in request.FILES.getlist('imagenes[]'):
-            # Guardar las imágenes en MEDIA_ROOT
+            # Ruta absoluta para guardar la imagen original
             ruta_absoluta = os.path.join(settings.MEDIA_ROOT, imagen.name)
+            
+            # Guardar la imagen original
             with open(ruta_absoluta, 'wb') as f:
                 for chunk in imagen.chunks():
                     f.write(chunk)
-            # Generar la URL absoluta de la imagen
+
+            # Comprimir la imagen usando Pillow
+            try:
+                img = Image.open(ruta_absoluta)
+                img = img.convert('RGB')  # Convertir a RGB si es PNG o tiene transparencia
+
+                # Redimensionar si es muy grande (opcional)
+                max_size = (1280, 1280)
+                img.thumbnail(max_size)
+
+                # Guardar imagen comprimida (reemplazando la original)
+                img.save(ruta_absoluta, format='JPEG', quality=70, optimize=True)
+            except Exception as e:
+                print("Error al comprimir imagen:", e)
+
+            # Generar URL absoluta para el PDF
             imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{imagen.name}")
             imagenes_rutas.append(imagen_url)
 
-        # Añadir las imágenes al contexto
         datos['imagenes_rutas'] = imagenes_rutas
 
         datos['accesorios'] = accesorios
