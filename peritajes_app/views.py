@@ -239,48 +239,48 @@ def generar_pdf(request):
         }
         
         
-        imagenes_rutas = []
+        # imagenes_rutas = []
         
-        # Proceso de manejo de imágenes
-        for imagen in request.FILES.getlist('imagenes[]'):
-            # Abrir la imagen usando Pillow
-            img = Image.open(imagen)
+        # # Proceso de manejo de imágenes
+        # for imagen in request.FILES.getlist('imagenes[]'):
+        #     # Abrir la imagen usando Pillow
+        #     img = Image.open(imagen)
             
-            # Ajustar el tamaño y el modo de la imagen para reducir el tamaño
-            try:
-                resample_mode = Image.Resampling.LANCZOS
-            except AttributeError:
-                resample_mode = Image.LANCZOS
+        #     # Ajustar el tamaño y el modo de la imagen para reducir el tamaño
+        #     try:
+        #         resample_mode = Image.Resampling.LANCZOS
+        #     except AttributeError:
+        #         resample_mode = Image.LANCZOS
             
-            # Redimensionar la imagen si es necesario, aquí puedes poner tu lógica de tamaño
-            img = img.resize((800, 800), resample=resample_mode)  # Cambia las dimensiones como quieras
+        #     # Redimensionar la imagen si es necesario, aquí puedes poner tu lógica de tamaño
+        #     img = img.resize((800, 800), resample=resample_mode)  # Cambia las dimensiones como quieras
             
-            # Comprimir la imagen para reducir el tamaño (si es una imagen JPG)
-            if img.mode != 'RGB':
-                img = img.convert('RGB')  # Convertir a RGB si es necesario
+        #     # Comprimir la imagen para reducir el tamaño (si es una imagen JPG)
+        #     if img.mode != 'RGB':
+        #         img = img.convert('RGB')  # Convertir a RGB si es necesario
 
-            # Guardar la imagen comprimida en memoria (sin escribir en disco)
-            img_io = BytesIO()
-            img.save(img_io, format='JPEG', quality=85)  # Ajusta la calidad a tu preferencia
-            img_io.seek(0)
+        #     # Guardar la imagen comprimida en memoria (sin escribir en disco)
+        #     img_io = BytesIO()
+        #     img.save(img_io, format='JPEG', quality=85)  # Ajusta la calidad a tu preferencia
+        #     img_io.seek(0)
 
-            # Convertir la imagen comprimida en un archivo de memoria
-            imagen_comprimida = InMemoryUploadedFile(
-                img_io, None, imagen.name, 'image/jpeg', img_io.tell(), None
-            )
+        #     # Convertir la imagen comprimida en un archivo de memoria
+        #     imagen_comprimida = InMemoryUploadedFile(
+        #         img_io, None, imagen.name, 'image/jpeg', img_io.tell(), None
+        #     )
 
-            # Guardar la imagen en el sistema
-            ruta_absoluta = os.path.join(settings.MEDIA_ROOT, imagen.name)
-            with open(ruta_absoluta, 'wb') as f:
-                for chunk in imagen_comprimida.chunks():
-                    f.write(chunk)
+        #     # Guardar la imagen en el sistema
+        #     ruta_absoluta = os.path.join(settings.MEDIA_ROOT, imagen.name)
+        #     with open(ruta_absoluta, 'wb') as f:
+        #         for chunk in imagen_comprimida.chunks():
+        #             f.write(chunk)
             
-            # Generar la URL absoluta de la imagen
-            imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{imagen.name}")
-            imagenes_rutas.append(imagen_url)
+        #     # Generar la URL absoluta de la imagen
+        #     imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{imagen.name}")
+        #     imagenes_rutas.append(imagen_url)
         
-        # Añadir las rutas de las imágenes al contexto
-        datos = {'imagenes_rutas': imagenes_rutas}
+        # # Añadir las rutas de las imágenes al contexto
+        # datos = {'imagenes_rutas': imagenes_rutas}
 
         datos['accesorios'] = accesorios
         
