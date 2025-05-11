@@ -94,7 +94,7 @@ main {
 }
 
 img {
-    height: 300px;  /* Ajusta el ancho según necesites */
+    height: 250px;  /* Ajusta el ancho según necesites */
     height: auto;  /* Mantiene la proporción */
     display: inline-block block;
     margin: 10px; /* Centra la imagen */

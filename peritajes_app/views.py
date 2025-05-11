@@ -234,33 +234,33 @@ def generar_pdf(request):
             'perito': request.POST.get('perito'),
         }
         
-
+        
         imagenes_rutas = []
+
         for imagen in request.FILES.getlist('imagenes[]'):
-            # Ruta absoluta para guardar la imagen original
-            ruta_absoluta = os.path.join(settings.MEDIA_ROOT, imagen.name)
-            
-            # Guardar la imagen original
-            with open(ruta_absoluta, 'wb') as f:
-                for chunk in imagen.chunks():
-                    f.write(chunk)
+            nombre = imagen.name.rsplit('.', 1)[0] + '.jpg'  # Fuerza a JPEG
+            ruta_absoluta = os.path.join(settings.MEDIA_ROOT, nombre)
 
-            # Comprimir la imagen usando Pillow
-            try:
-                img = Image.open(ruta_absoluta)
-                img = img.convert('RGB')  # Convertir a RGB si es PNG o tiene transparencia
+            # Abrir y convertir la imagen
+            with Image.open(imagen) as img:
+                # Convertir a RGB si es necesario (PNG puede tener canal alfa)
+                if img.mode in ("RGBA", "P"):
+                    img = img.convert("RGB")
 
-                # Redimensionar si es muy grande (opcional)
-                max_size = (1280, 1280)
-                img.thumbnail(max_size)
+                # Redimensionar si quieres, opcional:
+                # img = img.resize((800, 600))  # por ejemplo
 
-                # Guardar imagen comprimida (reemplazando la original)
-                img.save(ruta_absoluta, format='JPEG', quality=70, optimize=True)
-            except Exception as e:
-                print("Error al comprimir imagen:", e)
+                # Guardar comprimida
+                # Escalar a un ancho fijo, manteniendo proporción
+                max_ancho = 1024
+                if img.width > max_ancho:
+                    proporcion = max_ancho / float(img.width)
+                    nuevo_alto = int((float(img.height) * float(proporcion)))
+                    img = img.resize((max_ancho, nuevo_alto), Image.ANTIALIAS)
 
-            # Generar URL absoluta para el PDF
-            imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{imagen.name}")
+                img.save(ruta_absoluta, format='JPEG', optimize=True, quality=70)
+
+            imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{nombre}")
             imagenes_rutas.append(imagen_url)
 
         datos['imagenes_rutas'] = imagenes_rutas
