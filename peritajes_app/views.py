@@ -4,7 +4,7 @@ from weasyprint import HTML, CSS
 from django.conf import settings
 from django.templatetags.static import static
 from datetime import datetime
-from django.contrib.staticfiles import finder
+from django.contrib.staticfiles import finders
 from django.template.loader import get_template
 import os
 
@@ -259,7 +259,7 @@ def generar_pdf(request):
         html = template.render(datos)
 
         # Ruta absoluta al CSS
-        css_path = os.path.join(settings.BASE_DIR, 'static', 'css', 'formato.css')
+        css_path = finders.find('css/formato.css')
 
         # Generar PDF con estilos
         pdf_file = HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
