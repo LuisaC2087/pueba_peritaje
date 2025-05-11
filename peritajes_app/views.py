@@ -7,7 +7,10 @@ from datetime import datetime
 from django.contrib.staticfiles import finders
 from django.template.loader import get_template
 import os
-from PIL import Image
+from PIL import Image, ImageResampling
+from io import BytesIO
+
+
 def home(request):
     return render(request, 'index.html')
 
@@ -235,35 +238,7 @@ def generar_pdf(request):
         }
         
         
-        imagenes_rutas = []
-
-        for imagen in request.FILES.getlist('imagenes[]'):
-            nombre = imagen.name.rsplit('.', 1)[0] + '.jpg'  # Fuerza a JPEG
-            ruta_absoluta = os.path.join(settings.MEDIA_ROOT, nombre)
-
-            # Abrir y convertir la imagen
-            with Image.open(imagen) as img:
-                # Convertir a RGB si es necesario (PNG puede tener canal alfa)
-                if img.mode in ("RGBA", "P"):
-                    img = img.convert("RGB")
-
-                # Redimensionar si quieres, opcional:
-                # img = img.resize((800, 600))  # por ejemplo
-
-                # Guardar comprimida
-                # Escalar a un ancho fijo, manteniendo proporción
-                max_ancho = 1024
-                if img.width > max_ancho:
-                    proporcion = max_ancho / float(img.width)
-                    nuevo_alto = int((float(img.height) * float(proporcion)))
-                    img = img.resize((max_ancho, nuevo_alto), Image.ANTIALIAS)
-
-                img.save(ruta_absoluta, format='JPEG', optimize=True, quality=70)
-
-            imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{nombre}")
-            imagenes_rutas.append(imagen_url)
-
-        datos['imagenes_rutas'] = imagenes_rutas
+        datos['imagenes_rutas'] = procesar_y_guardar_imagenes(request)
 
         datos['accesorios'] = accesorios
         
@@ -287,4 +262,38 @@ def generar_pdf(request):
     else:
         return render(request, 'formulario.html')
 
+def procesar_y_guardar_imagenes(request):
+    imagenes_rutas = []
 
+    for imagen in request.FILES.getlist('imagenes[]'):
+        # Abrir imagen
+        img = Image.open(imagen)
+
+        # Convertir a RGB si no lo está
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
+
+        # Redimensionar si es muy grande
+        max_ancho = 1024
+        if img.width > max_ancho:
+            proporcion = max_ancho / float(img.width)
+            nuevo_alto = int(float(img.height) * proporcion)
+            img = img.resize((max_ancho, nuevo_alto), ImageResampling.LANCZOS)
+
+        # Comprimir y guardar como JPEG
+        buffer = BytesIO()
+        img.save(buffer, format='JPEG', quality=70, optimize=True)
+        buffer.seek(0)
+
+        # Crear nombre y ruta
+        nombre_archivo = os.path.splitext(imagen.name)[0] + "_comprimida.jpg"
+        ruta_absoluta = os.path.join(settings.MEDIA_ROOT, nombre_archivo)
+
+        with open(ruta_absoluta, 'wb') as f:
+            f.write(buffer.read())
+
+        # Agregar la URL accesible
+        imagen_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{nombre_archivo}")
+        imagenes_rutas.append(imagen_url)
+
+    return imagenes_rutas
